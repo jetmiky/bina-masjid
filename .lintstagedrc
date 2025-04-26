@@ -1,0 +1,3 @@
+{
+    "**/*.{html,json,css,js,ts}": ["prettier --write"]
+}
