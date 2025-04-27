@@ -25,8 +25,8 @@ $(document).ready(() => {
 
     configs.BASE_API_URL =
         configs.mode === "PRODUCTION"
-            ? "https://api-cfb2qjgxrq-uc.a.run.app"
-            : "http://127.0.0.1:5001/bina-masjid-digital/us-central1/api";
+            ? "https://api-cfb2qjgxrq-uc.a.run.app" // Production Ready API
+            : "http://127.0.0.1:5001/bina-masjid-digital/us-central1/api"; // Local API by Firebase Emulator Suite;
 
     $("#js-fetch").on("click", () => pingFetch(configs.BASE_API_URL));
     $("#js-jquery").on("click", () => pingJquery(configs.BASE_API_URL));

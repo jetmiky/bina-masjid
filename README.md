@@ -7,6 +7,7 @@ This repository contains both website and API for Bina Masjid Digital, a project
 - **Code Editor**, recommended to use [Visual Studio Code](https://code.visualstudio.com/).
 - **[NodeJS and Node Package Manager (NPM)](https://nodejs.org/en/download/current)** as JavaScript Runtime Environment.
 - **[Git](https://git-scm.com/downloads)** as Version Control System, and GitHub Account ofc. _Optionally_, we can also install **Github Desktop**. :sunglasses:
+- **Java** to run Firebase Emulator Suite, which is optional but recommended for development proccess.
 
 ## :pill: Preparation
 
@@ -41,6 +42,17 @@ git config --global user.email "<your_github_email>"
 ---
 
 ## :cd: Initialization
+
+### Install Firebase Tools (Optional)
+
+This step is optional if you want to use Firebase Emulator Suite.
+Firebase Emulator mocks the environment (API, database, users), so that the development process won't affect production (i.e. API usage, database).
+
+Install global package for firebase tools.
+
+```
+npm install -g firebase-tools
+```
 
 ### Clone Repository
 
@@ -80,15 +92,17 @@ npm install
 
 ## :video_game: Development
 
-After completing the initialization steps, you only have to start Firebase Emulators everytime starting development.
-Why is that necessary? To make sure that it won't affect the production API usage, databases, etc.
+### Run Firebase Emulator Suite (Optinal)
+
+After completing the initialization steps, start Firebase Emulators to make sure the development proccess won't affect the production API usage, databases, etc.
 
 ```
-cd functions
 npm run serve
 ```
 
-- Open the application in the browser, by default its address should be _http://localhost:5500/public_
+This will also provide the hosting emulator in _http://localhost:5000_, but it doesn't support hot reloading, so I recommend to still use live-server extension and it should be accessible in _http://localhost:5500/public_
+
+If you're not using Firebase Emulators Suite, please adjust the BASE_API_URL configuration accordingly.
 
 ### Development collaboration
 
