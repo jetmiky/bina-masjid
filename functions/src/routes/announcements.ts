@@ -2,7 +2,7 @@ import { FirebaseFirestoreError } from "firebase-admin/firestore";
 import { type Request, Router } from "express";
 import { z, ZodError } from "zod";
 import { type AuthenticatedRequest, validateToken } from "../utils/tokens";
-import { getAsyncErrorMessage } from "../utils/errors";
+import { BadRequestError, NotFoundError, UnauthorizedError } from "../utils/errors";
 import db from "../utils/db";
 
 const router = Router({ mergeParams: true });
@@ -12,8 +12,7 @@ router.get("/", async (req: Request<{ uid: string }>, res) => {
         const mosque = db.mosques().doc(req.params.uid);
 
         if (!(await mosque.get()).exists) {
-            res.status(404).json({ success: false, message: "Mosque not found" });
-            return;
+            throw new NotFoundError("Mosque not found");
         }
 
         const announcements = await db.announcements(req.params.uid).get();
@@ -22,18 +21,15 @@ router.get("/", async (req: Request<{ uid: string }>, res) => {
         res.status(200).send({ success: true, data });
     } catch (error) {
         if (error instanceof FirebaseFirestoreError) {
-            res.status(400).json({ success: false, message: error.message });
+            throw new BadRequestError(error.message);
         }
-
-        res.status(500).json({ success: false, message: getAsyncErrorMessage(error) });
     }
 });
 
 router.post("/", validateToken, async (req: AuthenticatedRequest, res) => {
     try {
         if (req.user?.uid !== req.params.uid) {
-            res.status(401).json({ message: "Unauthorized", success: false });
-            return;
+            throw new UnauthorizedError("Unauthorized");
         }
 
         const schema = z.object({
@@ -57,34 +53,26 @@ router.post("/", validateToken, async (req: AuthenticatedRequest, res) => {
         });
     } catch (error) {
         if (error instanceof ZodError) {
-            res.status(400).json({
-                message: JSON.parse(error.message),
-                success: false,
-            });
-
-            return;
+            const message = error.errors.map((e) => `${e.path}: ${e.message}`).join(". ");
+            throw new BadRequestError(message);
         }
 
         if (error instanceof FirebaseFirestoreError) {
-            res.status(400).json({ success: false, message: error.message });
+            throw new BadRequestError(error.message);
         }
-
-        res.status(500).json({ success: false, message: getAsyncErrorMessage(error) });
     }
 });
 
 router.delete("/:id", validateToken, async (req: AuthenticatedRequest, res) => {
     try {
         if (req.user?.uid !== req.params.uid) {
-            res.status(401).json({ message: "Unauthorized", success: false });
-            return;
+            throw new UnauthorizedError("Unauthorized");
         }
 
         const announcement = db.announcements(req.params.uid).doc(req.params.id);
 
         if (!(await announcement.get()).exists) {
-            res.status(404).json({ success: false, message: "Announcement not found" });
-            return;
+            throw new NotFoundError("Announcement not found");
         }
 
         await announcement.delete();
@@ -96,10 +84,8 @@ router.delete("/:id", validateToken, async (req: AuthenticatedRequest, res) => {
         });
     } catch (error) {
         if (error instanceof FirebaseFirestoreError) {
-            res.status(400).json({ success: false, message: error.message });
+            throw new BadRequestError(error.message);
         }
-
-        res.status(500).json({ success: false, message: getAsyncErrorMessage(error) });
     }
 });
 

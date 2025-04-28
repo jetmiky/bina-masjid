@@ -4,7 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
 import express from "express";
 import { z, ZodError } from "zod";
-import { getAsyncErrorMessage } from "../utils/errors";
+import { BadRequestError, UnauthorizedError } from "../utils/errors";
 
 const router = express.Router();
 
@@ -36,28 +36,13 @@ router.post("/register", async (req, res) => {
         });
     } catch (error: unknown) {
         if (error instanceof ZodError) {
-            res.status(400).json({
-                message: JSON.parse(error.message),
-                success: false,
-            });
-
-            return;
+            const message = error.errors.map((e) => `${e.path}: ${e.message}`).join(". ");
+            throw new BadRequestError(message);
         }
 
-        const message = getAsyncErrorMessage(error);
         if (error instanceof FirebaseAuthError) {
-            res.status(400).json({
-                message,
-                success: false,
-            });
-
-            return;
+            throw new BadRequestError(error.message);
         }
-
-        res.status(500).json({
-            message,
-            success: false,
-        });
     }
 });
 
@@ -71,44 +56,26 @@ router.post("/login", async (req, res) => {
         const body = schema.parse(req.body);
 
         const { user } = await signInWithEmailAndPassword(auth, body.email, body.password);
-        if (user) {
-            const token = await user.getIdToken();
-
-            res.status(200).json({
-                message: "Login successful",
-                success: true,
-                data: { uid: user.uid, email: user.email, token },
-            });
-        } else {
-            res.status(400).json({
-                message: "Invalid credentials",
-                success: false,
-            });
+        if (!user) {
+            throw new UnauthorizedError("Invalid credentials");
         }
+
+        const token = await user.getIdToken();
+
+        res.status(200).json({
+            message: "Login successful",
+            success: true,
+            data: { uid: user.uid, email: user.email, token },
+        });
     } catch (error: unknown) {
         if (error instanceof ZodError) {
-            res.status(400).json({
-                message: JSON.parse(error.message),
-                success: false,
-            });
-
-            return;
+            const message = error.errors.map((e) => `${e.path}: ${e.message}`).join(". ");
+            throw new BadRequestError(message);
         }
 
-        const message = getAsyncErrorMessage(error);
         if (error instanceof FirebaseAuthError) {
-            res.status(400).json({
-                message,
-                success: false,
-            });
-
-            return;
+            throw new BadRequestError(error.message);
         }
-
-        res.status(500).json({
-            message,
-            success: false,
-        });
     }
 });
 

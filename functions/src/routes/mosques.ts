@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { z, ZodError } from "zod";
 import { type AuthenticatedRequest, validateToken } from "../utils/tokens";
-import { getAsyncErrorMessage } from "../utils/errors";
+import { BadRequestError, NotFoundError, UnauthorizedError } from "../utils/errors";
 import db from "../utils/db";
 
 import announcements from "./announcements";
@@ -9,31 +9,21 @@ import announcements from "./announcements";
 const router = Router();
 
 router.get("/:uid", async (req, res) => {
-    try {
-        const document = await db.mosques().doc(req.params.uid).get();
+    const document = await db.mosques().doc(req.params.uid).get();
 
-        if (document.exists) {
-            res.status(200).json({
-                success: true,
-                data: { ...document.data() },
-            });
-
-            return;
-        }
-
-        res.status(404).json({
-            success: false,
-            message: "Mosque not found",
-        });
-    } catch (error) {
-        res.status(500).json({ success: false, message: getAsyncErrorMessage(error) });
+    if (!document.exists) {
+        throw new NotFoundError("Mosque not found");
     }
+
+    res.status(200).json({
+        success: true,
+        data: { ...document.data() },
+    });
 });
 
 router.put("/:uid", validateToken, async (req: AuthenticatedRequest, res) => {
     if (req.user?.uid !== req.params.uid) {
-        res.status(401).json({ message: "Unauthorized", success: false });
-        return;
+        throw new UnauthorizedError("Unauthorized");
     }
 
     const schema = z.object({
@@ -48,16 +38,9 @@ router.put("/:uid", validateToken, async (req: AuthenticatedRequest, res) => {
         res.status(200).json({ message: "Mosque updated", data: body, success: true });
     } catch (error: unknown) {
         if (error instanceof ZodError) {
-            res.status(400).json({
-                message: JSON.parse(error.message),
-                success: false,
-            });
-
-            return;
+            const message = error.errors.map((e) => `${e.path}: ${e.message}`).join(". ");
+            throw new BadRequestError(message);
         }
-
-        const message = getAsyncErrorMessage(error);
-        res.status(500).json({ message, success: false });
     }
 });
 
