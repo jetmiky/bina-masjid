@@ -4,6 +4,7 @@ import admin from "firebase-admin";
 import express from "express";
 
 import auth from "./routes/auth";
+import mosques from "./routes/mosques";
 
 admin.initializeApp();
 
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/auth", auth);
+app.use("/mosques", mosques);
 
 app.get("/ping", (_, response) => {
     logger.info("Hello logs!", { structuredData: true });
