@@ -4,10 +4,12 @@ import { z, ZodError } from "zod";
 import { type AuthenticatedRequest, validateToken } from "../utils/tokens";
 import { getAsyncErrorMessage } from "../utils/errors";
 
+import announcements from "./announcements";
+
 const router = Router();
 
-router.get("/:id", async (req, res) => {
-    const document = await admin.firestore().collection("mosques").doc(req.params.id).get();
+router.get("/:uid", async (req, res) => {
+    const document = await admin.firestore().collection("mosques").doc(req.params.uid).get();
     document.exists
         ? res.status(200).json({
               success: true,
@@ -19,8 +21,8 @@ router.get("/:id", async (req, res) => {
           });
 });
 
-router.put("/:id", validateToken, async (req: AuthenticatedRequest, res) => {
-    if (req.user?.uid !== req.params.id) {
+router.put("/:uid", validateToken, async (req: AuthenticatedRequest, res) => {
+    if (req.user?.uid !== req.params.uid) {
         res.status(401).json({ message: "Unauthorized", success: false });
         return;
     }
@@ -32,7 +34,7 @@ router.put("/:id", validateToken, async (req: AuthenticatedRequest, res) => {
 
     try {
         const body = schema.parse(req.body);
-        await admin.firestore().collection("mosques").doc(req.params.id).update(body);
+        await admin.firestore().collection("mosques").doc(req.params.uid).update(body);
 
         res.status(200).json({ message: "Mosque updated", data: body, success: true });
     } catch (error: unknown) {
@@ -49,5 +51,7 @@ router.put("/:id", validateToken, async (req: AuthenticatedRequest, res) => {
         res.status(500).json({ message, success: false });
     }
 });
+
+router.use("/:uid/announcements", announcements);
 
 export default router;
