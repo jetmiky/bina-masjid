@@ -1,17 +1,8 @@
 import admin from "firebase-admin";
-import type { UserRecord } from "firebase-admin/auth";
 import type { Request, Response, NextFunction } from "express";
 import { UnauthorizedError } from "./errors";
 
-export interface AuthenticatedRequest extends Request {
-    user?: UserRecord;
-}
-
-export const validateToken = async (
-    request: AuthenticatedRequest,
-    response: Response,
-    next: NextFunction,
-) => {
+export const validateToken = async (request: Request, response: Response, next: NextFunction) => {
     try {
         const authorization = request.headers.authorization ?? "";
         const [, token] = authorization.split("Bearer ");

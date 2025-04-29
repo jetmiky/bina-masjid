@@ -1,6 +1,6 @@
-import { Router } from "express";
+import { type Request, Router } from "express";
 import { z, ZodError } from "zod";
-import { type AuthenticatedRequest, validateToken } from "../utils/tokens";
+import { validateToken } from "../utils/tokens";
 import { BadRequestError, NotFoundError, UnauthorizedError } from "../utils/errors";
 import db from "../utils/db";
 
@@ -21,7 +21,7 @@ router.get("/:uid", async (req, res) => {
     });
 });
 
-router.put("/:uid", validateToken, async (req: AuthenticatedRequest, res) => {
+router.put("/:uid", validateToken, async (req: Request, res) => {
     if (req.user?.uid !== req.params.uid) {
         throw new UnauthorizedError("Unauthorized");
     }

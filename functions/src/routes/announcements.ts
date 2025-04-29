@@ -1,7 +1,7 @@
 import { FirebaseFirestoreError } from "firebase-admin/firestore";
 import { type Request, Router } from "express";
 import { z, ZodError } from "zod";
-import { type AuthenticatedRequest, validateToken } from "../utils/tokens";
+import { validateToken } from "../utils/tokens";
 import { BadRequestError, NotFoundError, UnauthorizedError } from "../utils/errors";
 import db from "../utils/db";
 
@@ -26,7 +26,7 @@ router.get("/", async (req: Request<{ uid: string }>, res) => {
     }
 });
 
-router.post("/", validateToken, async (req: AuthenticatedRequest, res) => {
+router.post("/", validateToken, async (req: Request, res) => {
     try {
         if (req.user?.uid !== req.params.uid) {
             throw new UnauthorizedError("Unauthorized");
@@ -63,7 +63,7 @@ router.post("/", validateToken, async (req: AuthenticatedRequest, res) => {
     }
 });
 
-router.delete("/:id", validateToken, async (req: AuthenticatedRequest, res) => {
+router.delete("/:id", validateToken, async (req: Request, res) => {
     try {
         if (req.user?.uid !== req.params.uid) {
             throw new UnauthorizedError("Unauthorized");
