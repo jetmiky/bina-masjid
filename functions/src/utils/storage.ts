@@ -33,7 +33,8 @@ export async function upload(
 }
 
 /**
- * Get signed URL of file in Storage.
+ * Get signed URL of file in Firebase Storage.
+ * Defaults to 7 day expiration.
  *
  * @param { string } filepath Relative path of file to root, includes ext.
  * @return { Promise<string> } Returns signed URL of file.

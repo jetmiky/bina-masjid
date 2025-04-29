@@ -17,7 +17,7 @@ type ExtractResponse = {
  * Executed on 'multipart/form-data' content-type headers.
  *
  * @param {string | string[]} fieldNames Only filters provided fieldnames.
- * @return {Function} Express middleware
+ * @return {Function<void>} Returns function as Express middleware
  */
 function multipart(
     fieldNames: string | string[],

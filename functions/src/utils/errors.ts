@@ -6,16 +6,31 @@ export class ForbiddenError extends Error {}
 export class NotFoundError extends Error {}
 export class InternalServerError extends Error {}
 
+/**
+ * Extract error message from Error object.
+ *
+ * @param {unknown} error   Unknown errors.
+ * @return {string} Returns message of Error object.
+ */
 export function getAsyncErrorMessage(error: unknown): string {
     return error instanceof Error ? error.message : String(error);
 }
 
+/**
+ * Global error handlers, used as middleware.
+ *
+ * @param {Error} error Unknown errors.
+ * @param {Request} request Express Request object.
+ * @param {Response} response   Express Response object.
+ * @param {NextFunction} next   Express NextFunction object.
+ * @return {Promise<void>}
+ */
 export async function errorHandler(
     error: Error,
     request: Request,
     response: Response,
     next: NextFunction,
-) {
+): Promise<void> {
     const message = getAsyncErrorMessage(error);
 
     if (error instanceof BadRequestError) {
