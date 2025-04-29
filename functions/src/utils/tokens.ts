@@ -1,6 +1,7 @@
 import admin from "firebase-admin";
 import type { UserRecord } from "firebase-admin/auth";
 import type { Request, Response, NextFunction } from "express";
+import { UnauthorizedError } from "./errors";
 
 export interface AuthenticatedRequest extends Request {
     user?: UserRecord;
@@ -22,7 +23,6 @@ export const validateToken = async (
 
         next();
     } catch (error) {
-        response.status(401).json({ message: "Unauthorized", success: false });
-        return;
+        throw new UnauthorizedError("Unauthorized");
     }
 };

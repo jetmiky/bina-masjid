@@ -1,8 +1,9 @@
 import admin from "firebase-admin";
+import express from "express";
 import { FirebaseAuthError } from "firebase-admin/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { FirebaseError } from "firebase/app";
 import { auth } from "../config/firebase";
-import express from "express";
 import { z, ZodError } from "zod";
 import { BadRequestError, UnauthorizedError } from "../utils/errors";
 
@@ -56,10 +57,6 @@ router.post("/login", async (req, res) => {
         const body = schema.parse(req.body);
 
         const { user } = await signInWithEmailAndPassword(auth, body.email, body.password);
-        if (!user) {
-            throw new UnauthorizedError("Invalid credentials");
-        }
-
         const token = await user.getIdToken();
 
         res.status(200).json({
@@ -73,8 +70,8 @@ router.post("/login", async (req, res) => {
             throw new BadRequestError(message);
         }
 
-        if (error instanceof FirebaseAuthError) {
-            throw new BadRequestError(error.message);
+        if (error instanceof FirebaseError) {
+            throw new UnauthorizedError(error.code);
         }
     }
 });
