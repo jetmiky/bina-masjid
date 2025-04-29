@@ -1,4 +1,6 @@
+import logger from "firebase-functions/logger";
 import type { Request, Response, NextFunction } from "express";
+import { ZodError } from "zod";
 
 export class BadRequestError extends Error {}
 export class UnauthorizedError extends Error {}
@@ -31,7 +33,14 @@ export async function errorHandler(
     response: Response,
     next: NextFunction,
 ): Promise<void> {
-    const message = getAsyncErrorMessage(error);
+    let message = getAsyncErrorMessage(error);
+
+    if (error instanceof ZodError) {
+        message = error.errors.map((e) => `${e.path}: ${e.message}`).join(". ");
+
+        response.status(400).json({ message, success: false });
+        return;
+    }
 
     if (error instanceof BadRequestError) {
         response.status(400).json({ message, success: false });
@@ -53,6 +62,7 @@ export async function errorHandler(
         return;
     }
 
+    logger.error(message);
     response.status(500).json({ message, success: false });
 }
 

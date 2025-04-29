@@ -4,7 +4,7 @@ import { FirebaseAuthError } from "firebase-admin/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import { auth } from "../config/firebase";
-import { z, ZodError } from "zod";
+import { z } from "zod";
 import { BadRequestError, UnauthorizedError } from "../utils/errors";
 
 const router = express.Router();
@@ -36,13 +36,12 @@ router.post("/register", async (req, res) => {
             data: { uid, email },
         });
     } catch (error: unknown) {
-        if (error instanceof ZodError) {
-            const message = error.errors.map((e) => `${e.path}: ${e.message}`).join(". ");
-            throw new BadRequestError(message);
-        }
-
         if (error instanceof FirebaseAuthError) {
             throw new BadRequestError(error.message);
+        }
+
+        if (error instanceof Error) {
+            throw error;
         }
     }
 });
@@ -65,13 +64,12 @@ router.post("/login", async (req, res) => {
             data: { uid: user.uid, email: user.email, token },
         });
     } catch (error: unknown) {
-        if (error instanceof ZodError) {
-            const message = error.errors.map((e) => `${e.path}: ${e.message}`).join(". ");
-            throw new BadRequestError(message);
-        }
-
         if (error instanceof FirebaseError) {
             throw new UnauthorizedError(error.code);
+        }
+
+        if (error instanceof Error) {
+            throw error;
         }
     }
 });

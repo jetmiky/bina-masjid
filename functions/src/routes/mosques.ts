@@ -1,7 +1,7 @@
 import { type Request, Router } from "express";
-import { z, ZodError } from "zod";
+import { z } from "zod";
 import { validateToken } from "../utils/tokens";
-import { BadRequestError, NotFoundError, UnauthorizedError } from "../utils/errors";
+import { NotFoundError, UnauthorizedError } from "../utils/errors";
 import db from "../utils/db";
 
 import announcements from "./announcements";
@@ -31,17 +31,10 @@ router.put("/:uid", validateToken, async (req: Request, res) => {
         phone: z.string(),
     });
 
-    try {
-        const body = schema.parse(req.body);
-        await db.mosques().doc(req.params.uid).update(body);
+    const body = schema.parse(req.body);
+    await db.mosques().doc(req.params.uid).update(body);
 
-        res.status(200).json({ message: "Mosque updated", data: body, success: true });
-    } catch (error: unknown) {
-        if (error instanceof ZodError) {
-            const message = error.errors.map((e) => `${e.path}: ${e.message}`).join(". ");
-            throw new BadRequestError(message);
-        }
-    }
+    res.status(200).json({ message: "Mosque updated", data: body, success: true });
 });
 
 router.use("/:uid/announcements", announcements);
