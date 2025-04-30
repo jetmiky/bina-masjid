@@ -12,8 +12,12 @@
     },
     "devDependencies": {
         "@types/jquery": "^3.5.32",
+        "@types/pdfkit": "^0.13.9",
         "husky": "^9.1.7",
         "lint-staged": "^15.5.1",
         "prettier": "^3.5.3"
+    },
+    "dependencies": {
+        "pdfkit": "^0.17.0"
     }
 }
