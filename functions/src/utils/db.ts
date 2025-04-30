@@ -8,6 +8,7 @@ import {
 
 import type Mosque from "../types/Mosque";
 import type Announcement from "../types/Announcement";
+import type FinanceRecord from "../types/FinanceRecord";
 
 /**
  * Firestore types converter.
@@ -47,6 +48,7 @@ const db = {
     firestore: getFirestore,
     mosques: () => getRootCollection<Mosque>("mosques"),
     announcements: getSubCollection<Announcement>("announcements"),
+    finances: getSubCollection<FinanceRecord>("finance_records"),
 };
 
 export default db;

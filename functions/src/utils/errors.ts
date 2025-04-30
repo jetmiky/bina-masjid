@@ -36,7 +36,7 @@ export async function errorHandler(
     let message = getAsyncErrorMessage(error);
 
     if (error instanceof ZodError) {
-        message = error.errors.map((e) => `${e.path}: ${e.message}`).join(". ");
+        message = error.errors.map((e) => `${e.path}: ${e.message}`).join(".\n ");
 
         response.status(400).json({ message, success: false });
         return;

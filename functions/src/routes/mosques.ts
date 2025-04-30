@@ -5,6 +5,7 @@ import { NotFoundError, UnauthorizedError } from "../utils/errors";
 import db from "../utils/db";
 
 import announcements from "./announcements";
+import finances from "./finances";
 
 const router = Router();
 
@@ -38,5 +39,6 @@ router.put("/:uid", validateToken, async (req: Request, res) => {
 });
 
 router.use("/:uid/announcements", announcements);
+router.use("/:uid/finances", finances);
 
 export default router;
