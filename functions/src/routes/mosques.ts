@@ -1,3 +1,4 @@
+import admin from "firebase-admin";
 import { type Request, Router } from "express";
 import { z } from "zod";
 import { validateToken } from "../utils/tokens";
@@ -28,12 +29,14 @@ router.put("/:uid", validateToken, async (req: Request, res) => {
     }
 
     const schema = z.object({
+        name: z.string(),
         address: z.string(),
         phone: z.string(),
     });
 
     const body = schema.parse(req.body);
     await db.mosques().doc(req.params.uid).update(body);
+    await admin.auth().updateUser(req.params.uid, { displayName: body.name });
 
     res.status(200).json({ message: "Mosque updated", data: body, success: true });
 });

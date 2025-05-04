@@ -4,15 +4,20 @@ import { validateToken } from "../utils/tokens";
 import { NotFoundError, UnauthorizedError } from "../utils/errors";
 import db from "../utils/db";
 import { timestampFromISODateString } from "../utils/formats";
+import PDFDocument from "../utils/pdf";
+import type Mosque from "../types/Mosque";
+import type FinanceRecord from "../types/FinanceRecord";
 
 const router = Router({ mergeParams: true });
 
 router.get("/", async (req: Request<{ uid: string }>, res: Response) => {
-    const mosque = db.mosques().doc(req.params.uid);
+    const mosqueDocument = await db.mosques().doc(req.params.uid).get();
 
-    if (!(await mosque.get()).exists) {
+    if (!mosqueDocument.exists) {
         throw new NotFoundError("Mosque not found");
     }
+
+    const mosque = mosqueDocument.data() as Mosque;
 
     const schema = z.object({
         start_date: z.coerce.date().optional(),
@@ -35,15 +40,57 @@ router.get("/", async (req: Request<{ uid: string }>, res: Response) => {
     }
 
     const records = await q.orderBy("date", "desc").get();
-    const data = records.docs.map((record) => ({
-        ...record.data(),
-        date: record.data().date.toDate().toISOString(),
-    }));
+    const data = records.docs.map((record) => {
+        const d = record.data() as FinanceRecord;
 
-    res.status(200).json({
-        data,
-        success: true,
+        return {
+            ...d,
+            date: d.date.toDate().toISOString(),
+        };
     });
+
+    const document = new PDFDocument();
+
+    document.on("end", () => {
+        const data = document.getBuffersData();
+
+        res.writeHead(200, {
+            "Content-Length": Buffer.byteLength(data),
+            "Content-Type": "application/pdf",
+            "Content-disposition": "attachment;filename=report.pdf",
+        }).end(data);
+    });
+
+    document.fontSize(24).text("Finance Report", { align: "center" });
+    document.fontSize(16).moveDown(2).text(mosque.name);
+    document.fontSize(16).moveDown(2).text(mosque.address);
+    document.fontSize(16).moveDown(2).text(mosque.phone);
+
+    // Add table headers and rows manually
+    document
+        .fontSize(12)
+        .text("Date", { continued: true })
+        .text(" | ", { continued: true })
+        .text("Type", { continued: true })
+        .text(" | ", { continued: true })
+        .text("Amount", { continued: true })
+        .text(" | ", { continued: true })
+        .text("Description");
+    document.moveDown();
+
+    for (const record of data) {
+        document
+            .text(record.date, { continued: true })
+            .text(" | ", { continued: true })
+            .text(record.type, { continued: true })
+            .text(" | ", { continued: true })
+            .text(record.amount.toString(), { continued: true })
+            .text(" | ", { continued: true })
+            .text(record.description);
+        document.moveDown();
+    }
+
+    document.end();
 });
 
 router.post("/", validateToken, async (req: Request, res: Response) => {

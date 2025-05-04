@@ -26,6 +26,7 @@ router.post("/register", async (req, res) => {
         });
 
         await admin.firestore().collection("mosques").doc(uid).create({
+            name: body.name,
             address: "",
             phone: "",
         });
