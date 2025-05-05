@@ -3,25 +3,154 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bina Masjid Digital</title>
-
-        <link rel="stylesheet" href="./styles/main.css" />
+        <title>Bina Masjid Digital - Mosque Management System</title>
+        <link rel="stylesheet" href="./css/style.css" />
+        <link rel="stylesheet" href="./css/home.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap"
+            rel="stylesheet"
+        />
     </head>
     <body>
-        <header></header>
+        <div class="page-wrapper">
+            <!-- Header will be loaded via jQuery -->
+            <div id="header-placeholder"></div>
 
-        <main>
-            <h1>Hello world</h1>
+            <main>
+                <section class="hero">
+                    <div class="container">
+                        <div class="hero-content">
+                            <h1>Streamline Your Mosque Management</h1>
+                            <p>
+                                A comprehensive digital solution for modern mosques to manage
+                                announcements, finances, and community engagement.
+                            </p>
+                            <div class="hero-cta">
+                                <a href="register.html" class="btn btn-primary">Get Started</a>
+                                <a href="about.html" class="btn btn-secondary">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="hero-image">
+                            <img
+                                src="./assets/images/mosque-illustration.png"
+                                alt="Mosque Illustration"
+                            />
+                        </div>
+                    </div>
+                </section>
 
-            <section>
-                <button id="js-fetch">API using Fetch</button>
-                <button id="js-jquery">API using jQuery</button>
-            </section>
-        </main>
+                <section class="features">
+                    <div class="container">
+                        <h2 class="section-title">Why Choose Bina Masjid Digital?</h2>
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <img
+                                        src="./assets/icons/announcement.svg"
+                                        alt="Announcement Icon"
+                                    />
+                                </div>
+                                <h3>Announcement Management</h3>
+                                <p>
+                                    Easily create and manage mosque announcements for your
+                                    community.
+                                </p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <img src="./assets/icons/finance.svg" alt="Finance Icon" />
+                                </div>
+                                <h3>Financial Transparency</h3>
+                                <p>
+                                    Track donations and expenses with detailed reports and PDF
+                                    exports.
+                                </p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <img src="./assets/icons/profile.svg" alt="Profile Icon" />
+                                </div>
+                                <h3>Mosque Profile</h3>
+                                <p>
+                                    Build a beautiful online presence for your mosque and community.
+                                </p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <img src="./assets/icons/secure.svg" alt="Secure Icon" />
+                                </div>
+                                <h3>Secure Access</h3>
+                                <p>
+                                    Control who manages your mosque's digital presence with secure
+                                    authentication.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-        <footer></footer>
+                <section class="testimonials">
+                    <div class="container">
+                        <h2 class="section-title">What Mosques Say About Us</h2>
+                        <div class="testimonial-slider">
+                            <div class="testimonial">
+                                <div class="testimonial-content">
+                                    <p>
+                                        "Bina Masjid Digital has transformed how we manage our
+                                        mosque. Financial transparency has increased community trust
+                                        significantly."
+                                    </p>
+                                </div>
+                                <div class="testimonial-author">
+                                    <p class="author-name">Imam Ahmad</p>
+                                    <p class="author-mosque">Al-Falah Mosque</p>
+                                </div>
+                            </div>
+                            <div class="testimonial">
+                                <div class="testimonial-content">
+                                    <p>
+                                        "The easy-to-use interface has allowed us to keep our
+                                        community informed about events and important
+                                        announcements."
+                                    </p>
+                                </div>
+                                <div class="testimonial-author">
+                                    <p class="author-name">Ustadz Ibrahim</p>
+                                    <p class="author-mosque">Al-Hidayah Mosque</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-controls">
+                            <button class="prev-btn" aria-label="Previous testimonial">
+                                <img src="./assets/icons/arrow-left.svg" alt="Previous" />
+                            </button>
+                            <button class="next-btn" aria-label="Next testimonial">
+                                <img src="./assets/icons/arrow-right.svg" alt="Next" />
+                            </button>
+                        </div>
+                    </div>
+                </section>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="./scripts/main.js"></script>
+                <section class="cta">
+                    <div class="container">
+                        <div class="cta-content">
+                            <h2>Ready to Modernize Your Mosque Management?</h2>
+                            <p>
+                                Join hundreds of mosques already benefiting from our digital
+                                management solution.
+                            </p>
+                            <a href="register.html" class="btn btn-primary">Register Your Mosque</a>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Footer will be loaded via jQuery -->
+            <div id="footer-placeholder"></div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="./js/main.js"></script>
+        <script src="./js/home.js"></script>
     </body>
 </html>

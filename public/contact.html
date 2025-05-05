@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Contact Us - Bina Masjid Digital</title>
+        <link rel="stylesheet" href="./css/style.css" />
+        <link rel="stylesheet" href="./css/contact.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="page-wrapper">
+            <!-- Header will be loaded via jQuery -->
+            <div id="header-placeholder"></div>
+
+            <main>
+                <section class="page-header">
+                    <div class="container">
+                        <h1>Contact Us</h1>
+                        <p>We're here to help with any questions about Bina Masjid Digital</p>
+                    </div>
+                </section>
+
+                <section class="contact-content">
+                    <div class="container">
+                        <div class="contact-grid">
+                            <div class="contact-info">
+                                <h2>Get in Touch</h2>
+                                <p>
+                                    Have questions about our platform or need assistance? Reach out
+                                    to our friendly team using any of the methods below:
+                                </p>
+
+                                <div class="contact-methods">
+                                    <div class="contact-method">
+                                        <div class="method-icon">
+                                            <img src="./assets/icons/email.svg" alt="Email Icon" />
+                                        </div>
+                                        <div class="method-details">
+                                            <h3>Email Us</h3>
+                                            <p>support@binamasjiddigital.com</p>
+                                            <p>For general inquiries and support</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="contact-method">
+                                        <div class="method-icon">
+                                            <img src="./assets/icons/phone.svg" alt="Phone Icon" />
+                                        </div>
+                                        <div class="method-details">
+                                            <h3>Call Us</h3>
+                                            <p>+1 (234) 567-8900</p>
+                                            <p>Available Monday-Friday, 9am-5pm</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="contact-method">
+                                        <div class="method-icon">
+                                            <img
+                                                src="./assets/icons/location.svg"
+                                                alt="Location Icon"
+                                            />
+                                        </div>
+                                        <div class="method-details">
+                                            <h3>Visit Us</h3>
+                                            <p>123 Tech Avenue, Suite 456</p>
+                                            <p>Silicon Valley, CA 94000</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="social-media">
+                                    <h3>Connect With Us</h3>
+                                    <div class="social-icons">
+                                        <a href="#" class="social-icon" aria-label="Facebook">
+                                            <img src="./assets/icons/facebook.svg" alt="Facebook" />
+                                        </a>
+                                        <a href="#" class="social-icon" aria-label="Twitter">
+                                            <img src="./assets/icons/twitter.svg" alt="Twitter" />
+                                        </a>
+                                        <a href="#" class="social-icon" aria-label="Instagram">
+                                            <img
+                                                src="./assets/icons/instagram.svg"
+                                                alt="Instagram"
+                                            />
+                                        </a>
+                                        <a href="#" class="social-icon" aria-label="LinkedIn">
+                                            <img src="./assets/icons/linkedin.svg" alt="LinkedIn" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="contact-form-container">
+                                <h2>Send Us a Message</h2>
+                                <form id="contact-form" class="contact-form">
+                                    <div class="form-group">
+                                        <label for="name">Full Name</label>
+                                        <input type="text" id="name" name="name" required />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" id="email" name="email" required />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="mosque">Mosque Name (if applicable)</label>
+                                        <input type="text" id="mosque" name="mosque" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="subject">Subject</label>
+                                        <select id="subject" name="subject" required>
+                                            <option value="" disabled selected>
+                                                Select a subject
+                                            </option>
+                                            <option value="general">General Inquiry</option>
+                                            <option value="support">Technical Support</option>
+                                            <option value="pricing">Pricing Information</option>
+                                            <option value="feedback">Feedback</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="message">Message</label>
+                                        <textarea
+                                            id="message"
+                                            name="message"
+                                            rows="5"
+                                            required
+                                        ></textarea>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">
+                                        Send Message
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="faq">
+                    <div class="container">
+                        <h2 class="section-title">Frequently Asked Questions</h2>
+                        <div class="faq-list">
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>How much does Bina Masjid Digital cost?</h3>
+                                    <button class="toggle-btn" aria-label="Toggle answer">
+                                        <img src="./assets/icons/chevron-down.svg" alt="Expand" />
+                                    </button>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>
+                                        Bina Masjid Digital is available for free for basic
+                                        features. We also offer premium plans with additional
+                                        features starting at $29/month.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>Can multiple people manage a mosque account?</h3>
+                                    <button class="toggle-btn" aria-label="Toggle answer">
+                                        <img src="./assets/icons/chevron-down.svg" alt="Expand" />
+                                    </button>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>
+                                        Currently, each mosque has one primary account for security
+                                        reasons. However, we are working on adding multi-user access
+                                        in our premium plans.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>Is my mosque's financial data secure?</h3>
+                                    <button class="toggle-btn" aria-label="Toggle answer">
+                                        <img src="./assets/icons/chevron-down.svg" alt="Expand" />
+                                    </button>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>
+                                        Yes, we use industry-standard encryption and security
+                                        practices to protect all mosque data, with special attention
+                                        to financial information.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <h3>How do I export financial reports?</h3>
+                                    <button class="toggle-btn" aria-label="Toggle answer">
+                                        <img src="./assets/icons/chevron-down.svg" alt="Expand" />
+                                    </button>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>
+                                        You can export financial reports as PDF by selecting a date
+                                        range in the Financial Records section and clicking the
+                                        "Export to PDF" button.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Footer will be loaded via jQuery -->
+            <div id="footer-placeholder"></div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="./js/main.js"></script>
+        <script src="./js/contact.js"></script>
+    </body>
+</html>
