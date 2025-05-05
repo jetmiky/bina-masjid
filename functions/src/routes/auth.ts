@@ -31,7 +31,7 @@ router.post("/register", async (req, res) => {
             phone: "",
         });
 
-        res.status(200).json({
+        res.status(201).json({
             message: "Registration successful",
             success: true,
             data: { uid, email },
