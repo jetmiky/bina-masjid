@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Announcements - Bina Masjid Digital</title>
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../css/admin.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body class="admin-body">
+        <div class="admin-wrapper">
+            <aside class="admin-sidebar">
+                <div class="sidebar-header">
+                    <img
+                        src="../assets/icons/logo.svg"
+                        alt="Bina Masjid Digital"
+                        class="sidebar-logo"
+                    />
+                    <h2>Admin Panel</h2>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li>
+                            <a href="dashboard.html" class="nav-item">
+                                <img src="../assets/icons/dashboard.svg" alt="Dashboard" />
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="profile.html" class="nav-item">
+                                <img src="../assets/icons/profile.svg" alt="Profile" />
+                                Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="announcements.html" class="nav-item active">
+                                <img src="../assets/icons/announcement.svg" alt="Announcements" />
+                                Announcements
+                            </a>
+                        </li>
+                        <li>
+                            <a href="finances.html" class="nav-item">
+                                <img src="../assets/icons/finance.svg" alt="Finances" />
+                                Financial Records
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <div class="admin-content">
+                <header class="admin-header">
+                    <div class="header-search">
+                        <input type="search" placeholder="Search announcements..." />
+                    </div>
+
+                    <div class="header-actions">
+                        <button class="notifications-btn">
+                            <img src="../assets/icons/bell.svg" alt="Notifications" />
+                            <span class="notification-badge">3</span>
+                        </button>
+
+                        <div class="user-menu">
+                            <img
+                                src="https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg"
+                                alt="User"
+                                class="user-avatar"
+                            />
+                            <span class="user-name">Ahmad Rahman</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="admin-main">
+                    <div class="page-header">
+                        <h1>Announcements</h1>
+                        <button class="btn btn-primary" id="new-announcement-btn">
+                            <img src="../assets/icons/plus.svg" alt="Add" />
+                            New Announcement
+                        </button>
+                    </div>
+
+                    <div class="content-grid">
+                        <div class="announcements-list">
+                            <div class="announcement-card">
+                                <div class="announcement-header">
+                                    <h3>Eid Prayer Time Change</h3>
+                                    <span class="announcement-date">Posted 2 days ago</span>
+                                </div>
+                                <p>
+                                    Due to expected high attendance, Eid prayer will now be held at
+                                    7:30 AM instead of 8:00 AM.
+                                </p>
+                                <div class="announcement-actions">
+                                    <button class="btn btn-outline btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </div>
+                            </div>
+
+                            <div class="announcement-card">
+                                <div class="announcement-header">
+                                    <h3>Weekly Islamic Studies Class</h3>
+                                    <span class="announcement-date">Posted 5 days ago</span>
+                                </div>
+                                <p>
+                                    New Islamic Studies class starting this Saturday after Maghrib
+                                    prayer. All community members are welcome.
+                                </p>
+                                <div class="announcement-actions">
+                                    <button class="btn btn-outline btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="announcement-form hidden" id="announcement-form">
+                            <h2>New Announcement</h2>
+                            <form class="admin-form">
+                                <div class="form-group">
+                                    <label for="announcement-title">Title</label>
+                                    <input type="text" id="announcement-title" required />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="announcement-content">Content</label>
+                                    <textarea
+                                        id="announcement-content"
+                                        rows="5"
+                                        required
+                                    ></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="announcement-type">Type</label>
+                                    <select id="announcement-type" required>
+                                        <option value="general">General</option>
+                                        <option value="prayer">Prayer Times</option>
+                                        <option value="event">Event</option>
+                                        <option value="urgent">Urgent</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">
+                                        Post Announcement
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-outline"
+                                        id="cancel-announcement"
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="../js/admin.js"></script>
+    </body>
+</html>
