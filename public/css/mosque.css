@@ -1,0 +1,213 @@
+/* Mosque Profile Styles */
+.mosque-header {
+    background-color: var(--primary);
+    padding: var(--space-xl) 0;
+    color: white;
+}
+
+.mosque-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    align-items: center;
+}
+
+.mosque-image {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.mosque-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.mosque-details h1 {
+    color: white;
+    margin-bottom: var(--space-md);
+}
+
+.mosque-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.mosque-meta p {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.mosque-meta img {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+}
+
+.mosque-content {
+    padding: var(--space-xl) 0;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+}
+
+.announcements-section,
+.financial-section {
+    background-color: white;
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.announcements-list {
+    display: grid;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+}
+
+.announcement-card {
+    border: 1px solid var(--bg-gray);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    transition: var(--transition);
+}
+
+.announcement-card:hover {
+    border-color: var(--primary-light);
+    box-shadow: var(--shadow-sm);
+}
+
+.announcement-date {
+    color: var(--text-light);
+    font-size: 0.875rem;
+    margin-bottom: var(--space-xs);
+}
+
+.announcement-title {
+    color: var(--primary-dark);
+    margin-bottom: var(--space-xs);
+    font-size: 1.1rem;
+}
+
+.financial-summary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.summary-card {
+    background-color: var(--bg-off-white);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.summary-card h3 {
+    color: var(--text-medium);
+    font-size: 1rem;
+    margin-bottom: var(--space-sm);
+}
+
+.amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+}
+
+.export-section {
+    background-color: var(--bg-off-white);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-xl);
+}
+
+.export-form {
+    margin-top: var(--space-md);
+}
+
+.transactions-preview {
+    margin-top: var(--space-xl);
+}
+
+.transactions-list {
+    margin-top: var(--space-md);
+    border: 1px solid var(--bg-gray);
+    border-radius: var(--radius-md);
+}
+
+.transaction-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--bg-gray);
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-type {
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.transaction-type.donation {
+    background-color: rgba(39, 174, 96, 0.1);
+    color: var(--success);
+}
+
+.transaction-type.expense {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--error);
+}
+
+.transaction-amount {
+    font-weight: 600;
+}
+
+.transaction-amount.positive {
+    color: var(--success);
+}
+
+.transaction-amount.negative {
+    color: var(--error);
+}
+
+.loading {
+    text-align: center;
+    color: var(--text-light);
+    padding: var(--space-md);
+}
+
+@media (min-width: 768px) {
+    .mosque-info {
+        grid-template-columns: 300px 1fr;
+    }
+
+    .mosque-image {
+        margin: 0;
+    }
+}
+
+@media (min-width: 992px) {
+    .content-grid {
+        grid-template-columns: 1fr 1.5fr;
+    }
+}
