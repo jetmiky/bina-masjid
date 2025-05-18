@@ -1,10 +1,10 @@
 $(document).ready(() => {
     // Check authentication for admin pages
-    const token = localStorage.getItem("auth_token");
-    if (!token) {
-        window.location.href = "/login.html";
-        return;
-    }
+    // const token = localStorage.getItem("auth_token");
+    // if (!token) {
+    //     window.location.href = "/login.html";
+    //     return;
+    // }
 
     // Toggle mobile sidebar
     $(".mobile-menu-toggle").on("click", () => {

@@ -46,14 +46,33 @@ $(document).ready(() => {
 
     // Registration form validation
     validateForm("#register-form", (form) => {
-        // Simulate form submission (to be replaced with actual API call)
         const submitBtn = form.find("button[type='submit']");
         submitBtn.prop("disabled", true).text("Registering...");
 
-        // Simulate API call with timeout
-        setTimeout(() => {
-            // Redirect to login page (in a real implementation, this would happen after successful registration)
-            window.location.href = "login.html";
-        }, 2000);
+        $.ajax({
+            url: `${configs.API_URL}/auth/register`,
+            method: "POST",
+            data: {
+                email: $("#admin-email").val(),
+                password: $("#password").val(),
+                mosque: {
+                    name: $("#mosque-name").val(),
+                    phone: $("#mosque-phone").val(),
+                    address: {
+                        street: $("#mosque-address").val(),
+                        city: $("#mosque-city").val(),
+                        province: $("#mosque-province").val(),
+                        zip: $("#mosque-postal").val(),
+                    },
+                },
+            },
+            success: () => {
+                window.location.href = "login.html";
+            },
+            error: (e) => {
+                submitBtn.prop("disabled", false).text("Register");
+                alert(`Registration failed: ${e.responseJSON.message}`);
+            },
+        });
     });
 });

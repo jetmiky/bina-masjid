@@ -41,16 +41,29 @@
                                             type="text"
                                             id="mosque-name"
                                             name="mosqueName"
+                                            placeholder="Masjid Bina Digital Nusantara"
                                             required
                                         />
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="mosque-address">Address</label>
+                                        <label for="mosque-phone">Phone Number</label>
+                                        <input
+                                            type="tel"
+                                            id="mosque-phone"
+                                            name="mosquePhone"
+                                            placeholder="0219991234"
+                                            required
+                                        />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="mosque-address">Street Address</label>
                                         <input
                                             type="text"
                                             id="mosque-address"
                                             name="mosqueAddress"
+                                            placeholder="Jalan Bina Masjid No. 3"
                                             required
                                         />
                                     </div>
@@ -62,16 +75,7 @@
                                                 type="text"
                                                 id="mosque-city"
                                                 name="mosqueCity"
-                                                required
-                                            />
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="mosque-state">State/Province</label>
-                                            <input
-                                                type="text"
-                                                id="mosque-state"
-                                                name="mosqueState"
+                                                placeholder="Jakarta Timur"
                                                 required
                                             />
                                         </div>
@@ -79,59 +83,34 @@
 
                                     <div class="form-row">
                                         <div class="form-group">
-                                            <label for="mosque-country">Country</label>
+                                            <label for="mosque-province">Province</label>
                                             <input
                                                 type="text"
-                                                id="mosque-country"
-                                                name="mosqueCountry"
+                                                id="mosque-province"
+                                                name="mosqueProvince"
+                                                ,
+                                                placeholder="DKI Jakarta"
                                                 required
                                             />
                                         </div>
+                                    </div>
 
+                                    <div class="form-row">
                                         <div class="form-group">
                                             <label for="mosque-postal">Postal/Zip Code</label>
                                             <input
                                                 type="text"
                                                 id="mosque-postal"
                                                 name="mosquePostal"
+                                                placeholder="10710"
                                                 required
                                             />
                                         </div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="mosque-phone">Phone Number</label>
-                                        <input
-                                            type="tel"
-                                            id="mosque-phone"
-                                            name="mosquePhone"
-                                            required
-                                        />
-                                    </div>
                                 </div>
 
                                 <div class="form-section">
-                                    <h2>Administrator Information</h2>
-
-                                    <div class="form-group">
-                                        <label for="admin-name">Full Name</label>
-                                        <input
-                                            type="text"
-                                            id="admin-name"
-                                            name="adminName"
-                                            required
-                                        />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="admin-position">Position at Mosque</label>
-                                        <input
-                                            type="text"
-                                            id="admin-position"
-                                            name="adminPosition"
-                                            required
-                                        />
-                                    </div>
+                                    <h2>Account Information</h2>
 
                                     <div class="form-group">
                                         <label for="admin-email">Email Address</label>
@@ -139,23 +118,10 @@
                                             type="email"
                                             id="admin-email"
                                             name="adminEmail"
+                                            placeholder="admin@binamasjid.com"
                                             required
                                         />
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="admin-phone">Phone Number</label>
-                                        <input
-                                            type="tel"
-                                            id="admin-phone"
-                                            name="adminPhone"
-                                            required
-                                        />
-                                    </div>
-                                </div>
-
-                                <div class="form-section">
-                                    <h2>Account Security</h2>
 
                                     <div class="form-group">
                                         <label for="password">Password</label>
@@ -164,6 +130,7 @@
                                                 type="password"
                                                 id="password"
                                                 name="password"
+                                                placeholder="********"
                                                 required
                                             />
                                             <button
@@ -198,6 +165,7 @@
                                                 type="password"
                                                 id="confirm-password"
                                                 name="confirmPassword"
+                                                placeholder="********"
                                                 required
                                             />
                                             <button
