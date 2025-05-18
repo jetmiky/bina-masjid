@@ -1,43 +1,46 @@
-async function login(email, password) {
-    try {
-        const response = await fetch("/api/login", {
-            method: "POST",
-            body: JSON.stringify({ email, password }),
-        });
-        const { uid, token } = await response.json();
+function login(form, email, password) {
+    $.ajax({
+        url: `${configs.API_URL}/auth/login`,
+        method: "POST",
+        data: {
+            email,
+            password,
+        },
+        success: (response) => {
+            const { uid, token } = response.data;
 
-        localStorage.setItem("auth_token", token);
-        localStorage.setItem("auth_uid", uid);
+            localStorage.setItem("auth_token", token);
+            localStorage.setItem("auth_uid", uid);
 
-        // Show success message and redirect
-        const successMessage = $(
-            "<div class='success-message'>Login successful! Redirecting to dashboard...</div>",
-        );
+            // Show success message and redirect
+            const successMessage = $(
+                "<div class='success-message'>Login successful! Redirecting to dashboard...</div>",
+            );
 
-        form.before(successMessage);
+            form.before(successMessage);
 
-        setTimeout(() => {
-            window.location.href = "/admin/profile.html";
-        }, 1500);
-    } catch (error) {
-        console.error(error);
+            setTimeout(() => {
+                window.location.href = "/admin/profile.html";
+            }, 1500);
+        },
+        error: (e) => {
+            const errorMessage = $(
+                "<div class='error-message'>Invalid email or password. Please try again.</div>",
+            );
 
-        const errorMessage = $(
-            "<div class='error-message'>Invalid email or password. Please try again.</div>",
-        );
+            form.before(errorMessage);
 
-        form.before(errorMessage);
+            // Reset button
+            form.find("button[type='submit']").prop("disabled", false).text("Login");
 
-        // Reset button
-        submitBtn.prop("disabled", false).text("Login");
-
-        // Remove error message after 3 seconds
-        setTimeout(() => {
-            errorMessage.fadeOut(300, function () {
-                $(this).remove();
-            });
-        }, 3000);
-    }
+            // Remove error message after 3 seconds
+            setTimeout(() => {
+                errorMessage.fadeOut(300, function () {
+                    $(this).remove();
+                });
+            }, 3000);
+        },
+    });
 }
 
 $(document).ready(() => {
@@ -49,6 +52,6 @@ $(document).ready(() => {
         const email = $("#email").val();
         const password = $("#password").val();
 
-        login(email, password);
+        login(form, email, password);
     });
 });
