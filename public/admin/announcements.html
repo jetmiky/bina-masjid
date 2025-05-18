@@ -20,7 +20,7 @@
                         alt="Bina Masjid Digital"
                         class="sidebar-logo"
                     />
-                    <h2>Admin Panel</h2>
+                    <h2>Bina Masjid Digital</h2>
                 </div>
 
                 <nav class="sidebar-nav">
@@ -86,37 +86,7 @@
                     </div>
 
                     <div class="content-grid">
-                        <div class="announcements-list">
-                            <div class="announcement-card">
-                                <div class="announcement-header">
-                                    <h3>Eid Prayer Time Change</h3>
-                                    <span class="announcement-date">Posted 2 days ago</span>
-                                </div>
-                                <p>
-                                    Due to expected high attendance, Eid prayer will now be held at
-                                    7:30 AM instead of 8:00 AM.
-                                </p>
-                                <div class="announcement-actions">
-                                    <button class="btn btn-outline btn-sm">Edit</button>
-                                    <button class="btn btn-danger btn-sm">Delete</button>
-                                </div>
-                            </div>
-
-                            <div class="announcement-card">
-                                <div class="announcement-header">
-                                    <h3>Weekly Islamic Studies Class</h3>
-                                    <span class="announcement-date">Posted 5 days ago</span>
-                                </div>
-                                <p>
-                                    New Islamic Studies class starting this Saturday after Maghrib
-                                    prayer. All community members are welcome.
-                                </p>
-                                <div class="announcement-actions">
-                                    <button class="btn btn-outline btn-sm">Edit</button>
-                                    <button class="btn btn-danger btn-sm">Delete</button>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="announcements-list"></div>
 
                         <div class="announcement-form hidden" id="announcement-form">
                             <h2>New Announcement</h2>
@@ -133,16 +103,6 @@
                                         rows="5"
                                         required
                                     ></textarea>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="announcement-type">Type</label>
-                                    <select id="announcement-type" required>
-                                        <option value="general">General</option>
-                                        <option value="prayer">Prayer Times</option>
-                                        <option value="event">Event</option>
-                                        <option value="urgent">Urgent</option>
-                                    </select>
                                 </div>
 
                                 <div class="form-actions">
@@ -166,5 +126,6 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="../js/admin.js"></script>
+        <script src="../js/announcement.js"></script>
     </body>
 </html>

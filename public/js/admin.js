@@ -1,10 +1,13 @@
+const configs = {};
+configs.API_URL = "http://127.0.0.1:5001/bina-masjid-digital/us-central1/api";
+
 $(document).ready(() => {
     // Check authentication for admin pages
-    // const token = localStorage.getItem("auth_token");
-    // if (!token) {
-    //     window.location.href = "/login.html";
-    //     return;
-    // }
+    const token = localStorage.getItem("auth_token");
+    if (!token) {
+        window.location.href = "/login.html";
+        return;
+    }
 
     // Toggle mobile sidebar
     $(".mobile-menu-toggle").on("click", () => {
@@ -31,23 +34,6 @@ $(document).ready(() => {
     $("#cancel-transaction").on("click", () => {
         $("#transaction-form").addClass("hidden");
         $(".transactions-list").show();
-    });
-
-    // Form submissions
-    $("form").on("submit", function (e) {
-        e.preventDefault();
-        // Add your form submission logic here
-
-        // Show success message
-        const successMessage = $("<div class='success-message'>Changes saved successfully!</div>");
-        $(this).prepend(successMessage);
-
-        // Remove success message after 3 seconds
-        setTimeout(() => {
-            successMessage.fadeOut(300, function () {
-                $(this).remove();
-            });
-        }, 3000);
     });
 });
 
