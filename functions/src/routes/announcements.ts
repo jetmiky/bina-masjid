@@ -3,6 +3,7 @@ import { z } from "zod";
 import { validateToken } from "../utils/tokens";
 import { NotFoundError, UnauthorizedError } from "../utils/errors";
 import db from "../utils/db";
+import { FieldValue } from "firebase-admin/firestore";
 
 const router = Router({ mergeParams: true });
 
@@ -14,7 +15,10 @@ router.get("/", async (req: Request<{ uid: string }>, res) => {
     }
 
     const announcements = await db.announcements(req.params.uid).get();
-    const data = announcements.docs.map((doc) => doc.data());
+    const data = announcements.docs.map((doc) => {
+        const announcement = doc.data();
+        return { ...announcement, timestamp: announcement.timestamp.toDate().toISOString() };
+    });
 
     res.status(200).send({ success: true, data });
 });
@@ -36,7 +40,13 @@ router.post("/", validateToken, async (req: Request, res) => {
         ...body,
     };
 
-    await db.announcements(req.params.uid).doc(announcement.id).set(announcement);
+    await db
+        .announcements(req.params.uid)
+        .doc(announcement.id)
+        .set({
+            ...announcement,
+            timestamp: FieldValue.serverTimestamp(),
+        });
 
     res.status(201).json({
         message: "Announcement created",
