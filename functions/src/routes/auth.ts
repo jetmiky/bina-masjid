@@ -11,25 +11,38 @@ const router = express.Router();
 
 router.post("/register", async (req, res) => {
     const schema = z.object({
-        name: z.string().min(3),
         email: z.string().email(),
         password: z.string().min(8),
+        mosque: z.object({
+            name: z.string().min(3),
+            address: z.object({
+                street: z.string().min(3),
+                city: z.string().min(3),
+                province: z.string().min(3),
+                zip: z.coerce.number().int().gte(10000).lte(99999),
+            }),
+            phone: z.string().min(3),
+        }),
     });
 
     try {
         const body = schema.parse(req.body);
 
         const { email, uid } = await admin.auth().createUser({
-            displayName: body.name,
+            displayName: body.mosque.name,
             email: body.email,
             password: body.password,
         });
 
-        await admin.firestore().collection("mosques").doc(uid).create({
-            name: body.name,
-            address: "",
-            phone: "",
-        });
+        await admin
+            .firestore()
+            .collection("mosques")
+            .doc(uid)
+            .create({
+                name: body.mosque.name,
+                address: { ...body.mosque.address, zip: String(body.mosque.address.zip) },
+                phone: body.mosque.phone,
+            });
 
         res.status(201).json({
             message: "Registration successful",

@@ -29,16 +29,23 @@ router.put("/:uid", validateToken, async (req: Request, res) => {
     }
 
     const schema = z.object({
-        name: z.string(),
-        address: z.string(),
-        phone: z.string(),
+        name: z.string().min(3),
+        address: z.object({
+            street: z.string().min(3),
+            city: z.string().min(3),
+            province: z.string().min(3),
+            zip: z.coerce.number().int().gte(10000).lte(99999),
+        }),
+        phone: z.string().min(3),
     });
 
     const body = schema.parse(req.body);
-    await db.mosques().doc(req.params.uid).update(body);
+    const mosque = { ...body, address: { ...body.address, zip: String(body.address.zip) } };
+
+    await db.mosques().doc(req.params.uid).update(mosque);
     await admin.auth().updateUser(req.params.uid, { displayName: body.name });
 
-    res.status(200).json({ message: "Mosque updated", data: body, success: true });
+    res.status(200).json({ message: "Mosque updated", data: mosque, success: true });
 });
 
 router.use("/:uid/announcements", announcements);
