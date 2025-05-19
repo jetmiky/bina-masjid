@@ -1,46 +1,55 @@
 $(document).ready(() => {
-    // Contact form validation and submission
-    validateForm("#contact-form", (form) => {
-        // Simulate form submission (to be replaced with actual API call)
-        const submitBtn = form.find("button[type='submit']");
-        submitBtn.prop("disabled", true).text("Sending...");
+    $("#contact-form").on("submit", function (e) {
+        e.preventDefault();
 
-        // Simulate API call with timeout
-        setTimeout(() => {
-            // Reset form
-            form[0].reset();
+        let isFormValid = true;
 
-            // Show success message
-            const successMessage = $(
-                "<div class='success-message'>Your message has been sent successfully! We'll get back to you soon.</div>",
+        $(this).find(".error-message").remove();
+        $(this).find(".error").removeClass("error");
+
+        const validation = window.validation;
+
+        const requireds = $(this).find("[required]");
+        requireds.each(function () {
+            if (validation.isStringEmpty($(this).val())) {
+                isFormValid = false;
+
+                $(this).addClass("error");
+                $(this).after("<div class='error-message'>This field is required</div>");
+            }
+        });
+
+        const email = $("#email").val();
+        if (!validation.isValidEmail(email)) {
+            isFormValid = false;
+
+            $("#email").addClass("error");
+            $("#email").after(
+                "<div class='error-message'>Please enter a valid email address</div>",
             );
-            form.before(successMessage);
+        }
 
-            // Reset button
-            submitBtn.prop("disabled", false).text("Send Message");
+        if (!isFormValid) return;
 
-            // Remove success message after 5 seconds
-            setTimeout(() => {
-                successMessage.fadeOut(300, function () {
-                    $(this).remove();
-                });
-            }, 5000);
-        }, 1500);
+        const btn = $(this).find("button[type='submit']");
+        btn.attr("disabled", true).text("Sending...");
+
+        setTimeout(() => {
+            $(this).trigger("reset");
+            alert("Thanks for your message! We'll get back to you soon.");
+
+            btn.attr("disabled", false).text("Send Message");
+        }, 3000);
     });
 
     // FAQ accordion functionality
-    $(".faq-question").on("click", () => {
+    $(".faq-question").on("click", function () {
         const faqItem = $(this).parent();
-        const faqAnswer = faqItem.find(".faq-answer");
 
         if (faqItem.hasClass("active")) {
-            // Close the FAQ item
             faqItem.removeClass("active");
         } else {
-            // Close all FAQ items
             $(".faq-item").removeClass("active");
-
-            // Open the clicked FAQ item
             faqItem.addClass("active");
         }
     });

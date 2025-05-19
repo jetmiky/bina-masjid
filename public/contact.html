@@ -96,7 +96,7 @@
 
                             <div class="contact-form-container">
                                 <h2>Send Us a Message</h2>
-                                <form id="contact-form" class="contact-form">
+                                <form id="contact-form" class="contact-form" novalidate>
                                     <div class="form-group">
                                         <label for="name">Full Name</label>
                                         <input type="text" id="name" name="name" required />
@@ -120,7 +120,6 @@
                                             </option>
                                             <option value="general">General Inquiry</option>
                                             <option value="support">Technical Support</option>
-                                            <option value="pricing">Pricing Information</option>
                                             <option value="feedback">Feedback</option>
                                             <option value="other">Other</option>
                                         </select>
@@ -222,6 +221,7 @@
         </div>
 
         <script src="./js/jquery.min.js"></script>
+        <script src="./js/core/validation.js"></script>
         <script src="./js/main.js"></script>
         <script src="./js/contact.js"></script>
     </body>

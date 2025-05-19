@@ -1,5 +1,4 @@
 $(document).ready(() => {
-    // Get mosque ID from URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const mosqueId = urlParams.get("id");
 
@@ -35,22 +34,33 @@ $(document).ready(() => {
 });
 
 function loadMosqueDetails(mosqueId) {
-    // Simulated API call - Replace with actual API endpoint
-    setTimeout(() => {
-        const mosque = {
-            name: "Al-Falah Mosque",
-            address: "123 Islamic Street, Silicon Valley, CA 94000",
-            phone: "+1 (234) 567-8900",
-            email: "info@alfalah.com",
-        };
+    $.ajax(`/mosques/${mosqueId}`, {
+        success: (response) => {
+            console.log(response.data);
 
-        $("#mosqueName").text(mosque.name);
-        $("#mosqueAddress").html(
-            `<img src="./assets/icons/location.svg" alt="Location"> ${mosque.address}`,
-        );
-        $("#mosquePhone").html(`<img src="./assets/icons/phone.svg" alt="Phone"> ${mosque.phone}`);
-        $("#mosqueEmail").html(`<img src="./assets/icons/email.svg" alt="Email"> ${mosque.email}`);
-    }, 1000);
+            const mosque = {
+                name: "Al-Falah Mosque",
+                address: "123 Islamic Street, Silicon Valley, CA 94000",
+                phone: "+1 (234) 567-8900",
+                email: "info@alfalah.com",
+            };
+
+            $("#mosqueName").text(mosque.name);
+            $("#mosqueAddress").html(
+                `<img src="./assets/icons/location.svg" alt="Location"> ${mosque.address}`,
+            );
+            $("#mosquePhone").html(
+                `<img src="./assets/icons/phone.svg" alt="Phone"> ${mosque.phone}`,
+            );
+            $("#mosqueEmail").html(
+                `<img src="./assets/icons/email.svg" alt="Email"> ${mosque.email}`,
+            );
+        },
+        error: (e) => {
+            alert("Error getting mosque data");
+            console.error(e.responseJSON.message);
+        },
+    });
 }
 
 function loadAnnouncements(mosqueId) {

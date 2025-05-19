@@ -34,7 +34,7 @@ $(document).ready(() => {
         const requireds = $(this).find("[required]");
         requireds.each(function () {
             if (validation.isStringEmpty($(this).val())) {
-                isValid = false;
+                isFormValid = false;
 
                 $(this).addClass("error");
                 $(this).after("<div class='error-message'>This field is required</div>");

@@ -9,7 +9,7 @@ $(document).ready(() => {
     };
 
     function isStringEmpty(string) {
-        return !string.trim().length;
+        return !String(string).trim().length;
     }
 
     function isValidEmail(email) {
