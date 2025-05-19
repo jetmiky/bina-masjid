@@ -1,8 +1,8 @@
 $(document).ready(() => {
-    const mosqueId = localStorage.getItem("auth_uid");
+    const mosqueId = auth.getUid();
 
     $.ajax({
-        url: `${configs.API_URL}/mosques/${mosqueId}/announcements`,
+        url: `/mosques/${mosqueId}/announcements`,
         success: (response) => {
             $(".announcements-list").empty();
 
@@ -34,13 +34,9 @@ $(document).ready(() => {
     $("#announcement-form form").on("submit", function (e) {
         e.preventDefault();
 
-        const token = localStorage.getItem("auth_token");
         $.ajax({
-            url: `${configs.API_URL}/mosques/${mosqueId}/announcements`,
+            url: `/mosques/${mosqueId}/announcements`,
             method: "POST",
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
             data: {
                 title: $("#announcement-title").val(),
                 description: $("#announcement-content").val(),
@@ -66,15 +62,11 @@ $(document).ready(() => {
     });
 
     function deleteAnnouncement(id) {
-        const token = localStorage.getItem("auth_token");
-
         $.ajax({
-            url: `${configs.API_URL}/mosques/${mosqueId}/announcements/${id}`,
+            url: `/mosques/${mosqueId}/announcements/${id}`,
             method: "DELETE",
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
             success: (response) => {
+                alert("Announcement deleted");
                 console.log(response);
             },
             error: (e) => {

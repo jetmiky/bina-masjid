@@ -1,10 +1,5 @@
-const configs = {};
-configs.API_URL = "http://127.0.0.1:5001/bina-masjid-digital/us-central1/api";
-
 $(document).ready(() => {
-    // Check authentication for admin pages
-    const token = localStorage.getItem("auth_token");
-    if (!token) {
+    if (!window.auth.isLoggedIn()) {
         window.location.href = "/login.html";
         return;
     }

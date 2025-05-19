@@ -1,70 +1,101 @@
 $(document).ready(() => {
-    // Password strength checker
-    $("#password").on("keyup", function () {
-        const password = $(this).val();
-        const strengthMeter = $(".strength-segment");
-        const strengthText = $("#strength-value");
+    $(".toggle-password").on("click", function () {
+        const field = $(this).siblings("input");
+        const type = field.attr("type") === "password" ? "text" : "password";
+        field.attr("type", type);
 
-        // Reset strength indicators
-        strengthMeter.removeClass("weak medium strong");
-
-        if (password.length === 0) {
-            strengthText.text("Weak");
-            return;
-        }
-
-        // Check strength
-        let strength = 0;
-
-        // Length check
-        if (password.length >= 8) strength += 1;
-
-        // Uppercase check
-        if (/[A-Z]/.test(password)) strength += 1;
-
-        // Lowercase check
-        if (/[a-z]/.test(password)) strength += 1;
-
-        // Number check
-        if (/[0-9]/.test(password)) strength += 1;
-
-        // Special character check
-        if (/[^A-Za-z0-9]/.test(password)) strength += 1;
-
-        // Update strength indicator
-        if (strength <= 2) {
-            strengthText.text("Weak");
-            strengthMeter.slice(0, 1).addClass("weak");
-        } else if (strength <= 4) {
-            strengthText.text("Medium");
-            strengthMeter.slice(0, 3).addClass("medium");
+        const icon = $(this).find("img");
+        if (type === "text") {
+            icon.attr("src", "./assets/icons/eye-off.svg");
         } else {
-            strengthText.text("Strong");
-            strengthMeter.slice(0, 4).addClass("strong");
+            icon.attr("src", "./assets/icons/eye.svg");
         }
     });
 
-    // Registration form validation
-    validateForm("#register-form", (form) => {
-        const submitBtn = form.find("button[type='submit']");
+    $("#register-form").on("submit", function (e) {
+        e.preventDefault();
+
+        let isFormValid = true;
+
+        $(this).find(".error-message").remove();
+        $(this).find(".error").removeClass("error");
+
+        const email = $("#admin-email").val();
+        const password = $("#password").val();
+        const name = $("#mosque-name").val();
+        const phone = $("#mosque-phone").val();
+        const street = $("#mosque-address").val();
+        const city = $("#mosque-city").val();
+        const province = $("#mosque-province").val();
+        const zip = $("#mosque-postal").val();
+
+        const validation = window.validation;
+
+        const requireds = $(this).find("[required]");
+        requireds.each(function () {
+            if (validation.isStringEmpty($(this).val())) {
+                isValid = false;
+
+                $(this).addClass("error");
+                $(this).after("<div class='error-message'>This field is required</div>");
+            }
+        });
+
+        if (!validation.isValidEmail(email)) {
+            isFormValid = false;
+
+            $("#admin-email").addClass("error");
+            $("#admin-email").after(
+                "<div class='error-message'>Please enter a valid email address</div>",
+            );
+        }
+
+        if (!validation.isValidPassword(password)) {
+            isFormValid = false;
+
+            $("#password").addClass("error");
+            $("#password").after(
+                "<div class='error-message'>Password must be at least 8 characters long</div>",
+            );
+        }
+
+        if (!validation.isPasswordMatch(password, $("#confirm-password").val())) {
+            isFormValid = false;
+
+            $("#confirm-password").addClass("error");
+            $("#confirm-password").after("<div class='error-message'>Passwords do not match</div>");
+        }
+
+        if (!validation.isValidPhone(phone)) {
+            isFormValid = false;
+
+            $("#mosque-phone").addClass("error");
+            $("#mosque-phone").after(
+                "<div class='error-message'>Please enter a valid phone number</div>",
+            );
+        }
+
+        if (!validation.isValidPostalCode(zip)) {
+            isFormValid = false;
+
+            $("#mosque-postal").addClass("error");
+            $("#mosque-postal").after(
+                "<div class='error-message'>Please enter a valid postal code</div>",
+            );
+        }
+
+        if (!isFormValid) return;
+
+        const submitBtn = $(this).find("button[type='submit']");
         submitBtn.prop("disabled", true).text("Registering...");
 
         $.ajax({
-            url: `${configs.API_URL}/auth/register`,
+            url: "/auth/register",
             method: "POST",
             data: {
-                email: $("#admin-email").val(),
-                password: $("#password").val(),
-                mosque: {
-                    name: $("#mosque-name").val(),
-                    phone: $("#mosque-phone").val(),
-                    address: {
-                        street: $("#mosque-address").val(),
-                        city: $("#mosque-city").val(),
-                        province: $("#mosque-province").val(),
-                        zip: $("#mosque-postal").val(),
-                    },
-                },
+                email,
+                password,
+                mosque: { name, phone, address: { street, city, province, zip } },
             },
             success: () => {
                 window.location.href = "login.html";

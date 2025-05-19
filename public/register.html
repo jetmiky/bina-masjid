@@ -31,7 +31,7 @@
                                 <p>Create an account for your mosque to access all features</p>
                             </div>
 
-                            <form id="register-form" class="auth-form">
+                            <form id="register-form" class="auth-form" novalidate>
                                 <div class="form-section">
                                     <h2>Mosque Information</h2>
 
@@ -144,18 +144,6 @@
                                                 />
                                             </button>
                                         </div>
-                                        <div class="password-strength">
-                                            <div class="strength-meter">
-                                                <span class="strength-segment"></span>
-                                                <span class="strength-segment"></span>
-                                                <span class="strength-segment"></span>
-                                                <span class="strength-segment"></span>
-                                            </div>
-                                            <p class="strength-text">
-                                                Password strength:
-                                                <span id="strength-value">Weak</span>
-                                            </p>
-                                        </div>
                                     </div>
 
                                     <div class="form-group">
@@ -185,8 +173,8 @@
                                         <input type="checkbox" id="terms" name="terms" required />
                                         <label for="terms"
                                             >I agree to the <a href="#">Terms of Service</a> and
-                                            <a href="#">Privacy Policy</a></label
-                                        >
+                                            <a href="#">Privacy Policy</a>
+                                        </label>
                                     </div>
                                 </div>
 
@@ -208,6 +196,8 @@
         </div>
 
         <script src="./js/jquery.min.js"></script>
+        <script src="./js/core/config.js"></script>
+        <script src="./js/core/validation.js"></script>
         <script src="./js/main.js"></script>
         <script src="./js/register.js"></script>
     </body>

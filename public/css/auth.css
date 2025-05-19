@@ -106,41 +106,6 @@
     opacity: 1;
 }
 
-.password-strength {
-    margin-top: var(--space-xs);
-}
-
-.strength-meter {
-    display: flex;
-    gap: 5px;
-    margin-bottom: 5px;
-}
-
-.strength-segment {
-    height: 4px;
-    flex: 1;
-    background-color: var(--bg-gray);
-    border-radius: 2px;
-}
-
-.strength-segment.weak {
-    background-color: var(--error);
-}
-
-.strength-segment.medium {
-    background-color: var(--warning);
-}
-
-.strength-segment.strong {
-    background-color: var(--success);
-}
-
-.strength-text {
-    font-size: 0.75rem;
-    color: var(--text-light);
-    margin-bottom: 0;
-}
-
 .form-options {
     display: flex;
     justify-content: space-between;
