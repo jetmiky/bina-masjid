@@ -1,5 +1,7 @@
 import PDFDocument from "../pdf";
 import type Mosque from "../../types/Mosque";
+import { toCanvas } from "qrcode";
+import { createCanvas } from "canvas";
 
 export default class QRDocument extends PDFDocument {
     private mosque: Mosque;
@@ -22,7 +24,7 @@ export default class QRDocument extends PDFDocument {
 
         this.fontSize(16)
             .font("Helvetica-Bold")
-            .text("Finance Report", 50, 125, { align: "center" });
+            .text("Visit Our Profile", 50, 150, { align: "center" });
 
         this.font("Helvetica")
             .fontSize(10)
@@ -44,10 +46,28 @@ export default class QRDocument extends PDFDocument {
         );
     }
 
-    private generateQR(): void {
-        const WEBSITE_URL = "https://";
+    private async generateQR(): Promise<void> {
+        const WEBSITE_URL = process.env.WEBSITE_URL;
         const { uid } = this.mosque;
+        const URL = `${WEBSITE_URL}/mosque.html?id=${uid}`;
 
-        console.log(WEBSITE_URL + uid);
+        const IMAGE_SIZE = 250;
+
+        const canvas = createCanvas(IMAGE_SIZE, IMAGE_SIZE);
+        toCanvas(canvas, URL, {
+            errorCorrectionLevel: "H",
+            margin: 1,
+            color: {
+                dark: "#000000",
+                light: "#ffffff",
+            },
+        });
+
+        const qr = canvas.toDataURL("image/png");
+
+        this.image(qr, this.page.width / 2 - IMAGE_SIZE / 2, IMAGE_SIZE, {
+            fit: [IMAGE_SIZE, IMAGE_SIZE],
+            width: IMAGE_SIZE,
+        });
     }
 }

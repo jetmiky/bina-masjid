@@ -2,11 +2,16 @@ import { type Request, type Response, Router } from "express";
 import QRDocument from "../utils/documents/qr";
 import db from "../utils/db";
 import type Mosque from "../types/Mosque";
-import { NotFoundError } from "../utils/errors";
+import { NotFoundError, UnauthorizedError } from "../utils/errors";
+import { validateToken } from "../utils/tokens";
 
 const router = Router({ mergeParams: true });
 
-router.get("/", async (req: Request<{ uid: string }>, res: Response) => {
+router.get("/", validateToken, async (req: Request<{ uid: string }>, res: Response) => {
+    if (req.user?.uid !== req.params.uid) {
+        throw new UnauthorizedError("Unauthorized");
+    }
+
     const mosqueDocument = await db.mosques().doc(req.params.uid).get();
 
     if (!mosqueDocument.exists) {
