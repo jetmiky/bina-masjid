@@ -4,7 +4,7 @@ import { validateToken } from "../utils/tokens";
 import { NotFoundError, UnauthorizedError } from "../utils/errors";
 import db from "../utils/db";
 import { timestampFromISODateString } from "../utils/formats";
-import PDFDocument from "../utils/pdf";
+import { FinanceReport } from "../utils/pdf";
 import type Mosque from "../types/Mosque";
 import type FinanceRecord from "../types/FinanceRecord";
 
@@ -39,17 +39,10 @@ router.get("/", async (req: Request<{ uid: string }>, res: Response) => {
         q = q.where("date", "<", endDate);
     }
 
-    const records = await q.orderBy("date", "desc").get();
-    const data = records.docs.map((record) => {
-        const d = record.data() as FinanceRecord;
+    const records = await q.orderBy("date", "asc").get();
+    mosque.finances = records.docs.map((record) => record.data() as FinanceRecord);
 
-        return {
-            ...d,
-            date: d.date.toDate().toISOString(),
-        };
-    });
-
-    const document = new PDFDocument();
+    const document = new FinanceReport(mosque);
 
     document.on("end", () => {
         const data = document.getBuffersData();
@@ -61,35 +54,7 @@ router.get("/", async (req: Request<{ uid: string }>, res: Response) => {
         }).end(data);
     });
 
-    document.fontSize(24).text("Finance Report", { align: "center" });
-    document.fontSize(16).moveDown(2).text(mosque.name);
-    document.fontSize(16).moveDown(2).text(mosque.address);
-    document.fontSize(16).moveDown(2).text(mosque.phone);
-
-    // Add table headers and rows manually
-    document
-        .fontSize(12)
-        .text("Date", { continued: true })
-        .text(" | ", { continued: true })
-        .text("Type", { continued: true })
-        .text(" | ", { continued: true })
-        .text("Amount", { continued: true })
-        .text(" | ", { continued: true })
-        .text("Description");
-    document.moveDown();
-
-    for (const record of data) {
-        document
-            .text(record.date, { continued: true })
-            .text(" | ", { continued: true })
-            .text(record.type, { continued: true })
-            .text(" | ", { continued: true })
-            .text(record.amount.toString(), { continued: true })
-            .text(" | ", { continued: true })
-            .text(record.description);
-        document.moveDown();
-    }
-
+    document.generate();
     document.end();
 });
 
