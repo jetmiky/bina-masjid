@@ -126,13 +126,8 @@
                         </div>
 
                         <div class="profile-section">
-                            <h2>Administrator Information</h2>
+                            <h2>Account Information</h2>
                             <form class="admin-form">
-                                <div class="form-group">
-                                    <label for="admin-name">Full Name</label>
-                                    <input type="text" id="admin-name" value="Ahmad Rahman" />
-                                </div>
-
                                 <div class="form-group">
                                     <label for="admin-email">Email Address</label>
                                     <input
@@ -152,34 +147,19 @@
                         </div>
 
                         <div class="profile-section">
-                            <h2>Change Password</h2>
-                            <form class="admin-form">
-                                <div class="form-group">
-                                    <label for="current-password">Current Password</label>
-                                    <input type="password" id="current-password" />
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="new-password">New Password</label>
-                                    <input type="password" id="new-password" />
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="confirm-password">Confirm New Password</label>
-                                    <input type="password" id="confirm-password" />
-                                </div>
-
-                                <button type="submit" class="btn btn-primary">
-                                    Update Password
-                                </button>
-                            </form>
+                            <button id="js-get-qr" class="btn btn-primary">
+                                Get Profile QR Code
+                            </button>
                         </div>
                     </div>
                 </main>
             </div>
         </div>
 
-        <script src="./js/jquery.min.js"></script>
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/core/config.js"></script>
+        <script src="../js/core/auth.js"></script>
         <script src="../js/admin.js"></script>
+        <script src="../js/profile.js"></script>
     </body>
 </html>

@@ -27,7 +27,7 @@ router.get("/", validateToken, async (req: Request<{ uid: string }>, res: Respon
         res.writeHead(200, {
             "Content-Length": Buffer.byteLength(data),
             "Content-Type": "application/pdf",
-            "Content-disposition": "attachment;filename=report.pdf",
+            "Content-disposition": "attachment;filename=QRCode.pdf",
         }).end(data);
     });
 
