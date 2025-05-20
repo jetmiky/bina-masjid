@@ -18,7 +18,7 @@ router.get("/", validateToken, async (req: Request<{ uid: string }>, res: Respon
         throw new NotFoundError("Mosque not found");
     }
 
-    const mosque = mosqueDocument.data() as Mosque;
+    const mosque = { ...mosqueDocument.data(), uid: req.params.uid } as Mosque;
     const document = new QRDocument(mosque);
 
     document.on("end", () => {

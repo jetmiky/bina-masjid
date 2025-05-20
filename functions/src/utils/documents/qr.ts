@@ -46,11 +46,15 @@ export default class QRDocument extends PDFDocument {
         );
     }
 
-    private async generateQR(): Promise<void> {
+    private constructRedirectURL(): string {
         const WEBSITE_URL = process.env.WEBSITE_URL;
         const { uid } = this.mosque;
-        const URL = `${WEBSITE_URL}/mosque.html?id=${uid}`;
 
+        return `${WEBSITE_URL}/mosque.html?id=${uid}`;
+    }
+
+    private generateQR(): void {
+        const URL = this.constructRedirectURL();
         const IMAGE_SIZE = 250;
 
         const canvas = createCanvas(IMAGE_SIZE, IMAGE_SIZE);
