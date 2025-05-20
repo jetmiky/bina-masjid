@@ -1,4 +1,5 @@
 import { Timestamp } from "firebase-admin/firestore";
+import { Rupiah } from "@jetmiky/rupiahjs";
 
 /**
  * Converts ISO Date String or Date object to Firestore Timestamp.
@@ -8,6 +9,17 @@ import { Timestamp } from "firebase-admin/firestore";
  */
 export function timestampFromISODateString(date: string | Date): Timestamp {
     return Timestamp.fromDate(new Date(date));
+}
+
+/**
+ * Converts currency amount to Indonesian Rupiah.
+ *
+ * @param {number} amount Amount of currency
+ * @return {string}
+ */
+export function speakCurrency(amount: number): string {
+    const rupiah = new Rupiah(amount);
+    return rupiah.getCurrency("IDR").split("IDR")[1];
 }
 
 /**

@@ -33,8 +33,6 @@ $(document).ready(() => {
 });
 
 function logout() {
-    localStorage.removeItem("auth_token");
-    localStorage.removeItem("auth_uid");
-
+    window.auth.logout();
     window.location.href = "/login.html";
 }

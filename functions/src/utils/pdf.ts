@@ -1,6 +1,6 @@
 import PDFKit from "pdfkit";
 import type Mosque from "../types/Mosque";
-import { Rupiah } from "@jetmiky/rupiahjs";
+import { speakCurrency } from "./formats";
 
 export default class PDFDocument extends PDFKit {
     private buffers: Uint8Array[] = [];
@@ -77,9 +77,9 @@ export class FinanceReport extends PDFDocument {
             const date = record.date.toDate().toISOString().split("T")[0];
             const description = record.description;
             const type = record.type;
-            const amount = new Rupiah(record.amount);
+            const amount = speakCurrency(record.amount);
 
-            this.generateTableData(y, date, description, type, amount.getCurrency());
+            this.generateTableData(y, date, description, type, amount);
             y += 25;
         }
     }
