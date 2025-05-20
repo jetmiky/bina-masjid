@@ -5,10 +5,24 @@ import { validateToken } from "../utils/tokens";
 import { NotFoundError, UnauthorizedError } from "../utils/errors";
 import db from "../utils/db";
 
+import qr from "./qr";
 import announcements from "./announcements";
 import finances from "./finances";
 
 const router = Router();
+
+router.get("/", async (req, res) => {
+    const schema = z.object({
+        limit: z.coerce.number().min(1).max(10).default(3),
+    });
+
+    const { limit } = schema.parse(req.query);
+
+    const mosques = await db.mosques().limit(limit).get();
+    const data = mosques.docs.map((doc) => ({ ...doc.data(), uid: doc.id }));
+
+    res.status(200).json({ success: true, data });
+});
 
 router.get("/:uid", async (req, res) => {
     const document = await db.mosques().doc(req.params.uid).get();
@@ -48,6 +62,7 @@ router.put("/:uid", validateToken, async (req: Request, res) => {
     res.status(200).json({ message: "Mosque updated", data: mosque, success: true });
 });
 
+router.use("/:uid/qr", qr);
 router.use("/:uid/announcements", announcements);
 router.use("/:uid/finances", finances);
 

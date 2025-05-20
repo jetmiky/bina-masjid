@@ -4,7 +4,7 @@ import { validateToken } from "../utils/tokens";
 import { NotFoundError, UnauthorizedError } from "../utils/errors";
 import db from "../utils/db";
 import { timestampFromISODateString } from "../utils/formats";
-import { FinanceReport } from "../utils/pdf";
+import FinanceReport from "../utils/documents/report";
 import type Mosque from "../types/Mosque";
 import type FinanceRecord from "../types/FinanceRecord";
 
