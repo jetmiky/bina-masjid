@@ -31,9 +31,11 @@ router.get("/:uid", async (req, res) => {
         throw new NotFoundError("Mosque not found");
     }
 
+    const { email } = await admin.auth().getUser(req.params.uid);
+
     res.status(200).json({
         success: true,
-        data: { ...document.data() },
+        data: { ...document.data(), email },
     });
 });
 
