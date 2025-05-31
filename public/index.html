@@ -4,7 +4,10 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Bina Masjid Digital - Mosque Management System</title>
+        <link rel="icon" href="assets/img/logo.png" type="image/x-icon">
         <link rel="stylesheet" href="./css/style.css" />
+        <link rel="stylesheet" href="./css/header.css" />
+        <link rel="stylesheet" href="./css/mobile-navbar.css" />
         <link rel="stylesheet" href="./css/home.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap"
@@ -18,27 +21,33 @@
 
             <main>
                 <section class="hero">
-                    <div class="container">
+                    <div class="container containers">
                         <div class="hero-content">
+                            <div class="location-tag">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="location-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5S13.4 11.5 12 11.5z"/>
+                            </svg>
+                                <span>Serving communities across cities and villages</span>
+                            </div>
                             <h1>Streamline Your Mosque Management</h1>
                             <p>
                                 A comprehensive digital solution for modern mosques to manage
                                 announcements, finances, and community engagement.
                             </p>
                             <div class="hero-cta">
-                                <a href="register.html" class="btn btn-primary">Get Started</a>
-                                <a href="about.html" class="btn btn-secondary">Learn More</a>
+                                <a href="register.html" class="button-div button-primary link text-white">Get Started</a>
+                                <a href="about.html" class="button-div button-secondary link text-white">Learn More</a>
                             </div>
-                        </div>
-                        <div class="hero-image">
-                            <img
-                                src="https://images.pexels.com/photos/2869318/pexels-photo-2869318.jpeg"
-                                alt="Mosque Illustration"
-                            />
                         </div>
                     </div>
                 </section>
-
+                <section class="features registered">
+                    <div class="container">
+                        <h2 class="section-title">Registered Mosque</h2>
+                    <div class="mosque-list-container" id="mosque-list">
+                    </div>
+                    </div>
+                </section>
                 <section class="features">
                     <div class="container">
                         <h2 class="section-title">Why Choose Bina Masjid Digital?</h2>
@@ -139,7 +148,7 @@
                                 Join hundreds of mosques already benefiting from our digital
                                 management solution.
                             </p>
-                            <a href="register.html" class="btn btn-primary">Register Your Mosque</a>
+                            <a href="register.html" class="button-div button-primary link text-white">Register Your Mosque</a>
                         </div>
                     </div>
                 </section>
@@ -147,10 +156,12 @@
 
             <!-- Footer will be loaded via jQuery -->
             <div id="footer-placeholder"></div>
+             <div id="mobile-navbar-placeholder"></div>
         </div>
 
         <script src="./js/jquery.min.js"></script>
         <script src="./js/main.js"></script>
+        <script src="./js/core/config.js"></script>
         <script src="./js/home.js"></script>
     </body>
 </html>

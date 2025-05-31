@@ -57,6 +57,26 @@
     padding: 0;
 }
 
+::-webkit-scrollbar {
+    width: 15px; 
+    height: 8px; 
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #008080; 
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgb(64, 224, 208); 
+    border-radius: 10px; 
+    border: 2px solid #f1f1f1; 
+  }
+  
+ 
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(64, 224, 208); 
+  }
+
 html {
     font-size: 16px;
     scroll-behavior: smooth;
@@ -102,7 +122,7 @@ textarea {
 .page-wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100dvh;
 }
 
 main {
@@ -177,6 +197,13 @@ p {
     border-radius: 1.5px;
 }
 
+.divider {
+    width: 40%;
+    height: 1.2px;
+    background-color: white;
+    margin: -2px 0px 10px 0px;
+}
+
 /* Buttons */
 .btn {
     display: inline-block;
@@ -243,10 +270,15 @@ p {
 .form-group textarea {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid var(--bg-gray);
-    border-radius: var(--radius-md);
-    background-color: var(--bg-light);
+    /* border: 1px solid var(--bg-gray); */
+    /* border-radius: var(--radius-md); */
+    /* background-color: var(--bg-light); */
     transition: var(--transition);
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: solid 3px slategray;
+    background-color: transparent;
 }
 
 .form-group input:focus,
@@ -281,7 +313,7 @@ p {
 }
 
 /* Header */
-.site-header {
+/* .site-header {
     position: sticky;
     top: 0;
     background-color: var(--bg-light);
@@ -402,14 +434,14 @@ p {
 
 .mobile-menu-toggle.active .close-icon {
     display: block;
-}
+} */
 
 /* Footer */
 .site-footer {
     background-color: var(--primary-dark);
     color: white;
     padding: var(--space-xl) 0 var(--space-md);
-    margin-top: var(--space-xxl);
+    /* margin-top: var(--space-xxl); */
 }
 
 .footer-content {
@@ -421,6 +453,22 @@ p {
 .footer-logo img {
     height: 60px;
     margin-bottom: var(--space-sm);
+}
+
+.footer-logo-link {
+    display: flex;
+    align-items: center;
+    font-size: 1.25em;
+    font-style: italic;
+}
+
+.footer-logo-title {
+    margin-top: -5px;
+    font-size: 2.8em;
+    color: #00ffff;
+    margin-left: 2px;
+    text-decoration: none;
+    font-family: 'CustomFont', sans-serif;
 }
 
 .footer-logo p {
@@ -536,7 +584,7 @@ p {
 .cta {
     background-color: var(--primary-light);
     padding: var(--space-xl) 0;
-    margin-top: var(--space-xl);
+    /* margin-top: var(--space-xl); */
 }
 
 .cta-content {
@@ -659,4 +707,214 @@ p {
 }
 .mb-xl {
     margin-bottom: var(--space-xl);
+}
+
+/* abs */
+input:-webkit-autofill {
+    background-color: transparent;
+}
+
+input:-internal-autofill-selected {
+    background-color: transparent;
+}
+
+.button-div {
+    text-decoration: none;
+    cursor: pointer;
+    width: 200px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    border: none;
+}
+
+.button-div-left {
+    text-decoration: none;
+    cursor: pointer;
+    width: 200px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+.width-full {
+    margin-top: 40px;
+    width: 100%;
+}
+
+.button-primary {
+    background: linear-gradient(135deg, #fca311 0%, #ff7f50 100%);
+    transition: all 0.1s ease-in-out;
+    color: #fff;
+}
+
+.button-primary:hover {
+    background-color: #00006e;
+    transform: scale(1.03);
+    color: #fff;
+}
+
+.button-secondary {
+    background: linear-gradient(135deg, #6e43c4 0%, #4b2e83 100%);
+    transition: all 0.1s ease-in-out;
+    color: #fff;
+}
+
+.button-secondary:hover {
+    background-color: #3e1989;
+    transform: scale(1.03);
+    color: #fff;
+}
+
+
+.text-white {
+    color: #ffffff;
+}
+
+.form__group {
+  margin-bottom: var(--space-md);
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 3px solid #708090;
+  outline: 0;
+  font-size: 1rem;
+  color: #444;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1em;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1em;
+  color: #9b9b9b;
+}
+
+.select__form__label {
+  position: absolute;
+  top: 20px;
+  transition: 0.2s;
+  font-size: 1em;
+  color: #9b9b9b;
+  pointer-events: none;
+}
+
+.form__field:focus {
+  ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1em;
+    color: #11998e;
+    font-weight:700;    
+  }
+  padding-bottom: 6px;  
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, #11998e,#38ef7d);
+  border-image-slice: 1;
+}
+/* reset input */
+.form__field{
+  &:required,&:invalid { box-shadow:none; }
+}
+
+/* Select and Textarea - Floating Label & Style Consistency */
+select.form__field,
+textarea.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 3px solid #708090;
+  outline: 0;
+  font-size: 1rem;
+  color: #444;
+  background: transparent;
+  padding: 7px 0;
+  resize: vertical;
+  transition: border-color 0.2s;
+  appearance: none;
+}
+
+/* Reset shadow jika invalid */
+select.form__field:required:invalid,
+textarea.form__field:required:invalid {
+  box-shadow: none;
+}
+
+/* Floating label active state */
+select.form__field:focus ~ .form__label,
+select.form__field:valid ~ .form__label,
+textarea.form__field:focus ~ .form__label,
+textarea.form__field:not(:placeholder-shown) ~ .form__label {
+  font-size: 1em;
+  top: 0;
+  color: #11998e;
+  font-weight: 700;
+}
+
+/* Border styling saat focus */
+select.form__field:focus,
+textarea.form__field:focus {
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, #11998e, #38ef7d);
+  border-image-slice: 1;
+}
+
+/* Label default positioning */
+
+
+/* Transparent placeholder untuk textarea */
+textarea.form__field::placeholder {
+  color: transparent;
+}
+
+textarea.form__field {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 3px solid #708090;
+    outline: 0;
+    font-size: 1rem;
+    color: #444;
+    background: transparent;
+    padding: 7px 0;
+    resize: vertical;
+    overflow: hidden;
+    min-height: 42px;
+    height: 42px; /* default height (1 line approx) */
+    transition: height 0.3s ease;
+}
+
+.error-message {
+    color: #ff0000;
+    font-size: smaller;
 }

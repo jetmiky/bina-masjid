@@ -1,8 +1,21 @@
 /* Mosque Profile Styles */
 .mosque-header {
-    background-color: var(--primary);
+    background-image:
+        url("../assets/img/Mosque.png"),
+        linear-gradient(to top, rgba(255, 183, 94, 0.7), rgba(255, 255, 255, 1));
+    background-size: cover;
+    color: #000000;
     padding: var(--space-xl) 0;
-    color: white;
+    text-align: center;
+    min-height: 50dvh;
+    display: flex;
+    align-items: center;
+}
+
+.mosque-container {
+    width: 95%;
+    margin: 0 2.5%;
+    padding-top: 70px;
 }
 
 .mosque-info {
@@ -28,7 +41,7 @@
 }
 
 .mosque-details h1 {
-    color: white;
+    color: #008080;
     margin-bottom: var(--space-md);
 }
 
@@ -43,13 +56,12 @@
     align-items: center;
     gap: var(--space-sm);
     margin: 0;
-    color: rgba(255, 255, 255, 0.9);
+    color: #008080;
 }
 
 .mosque-meta img {
     width: 20px;
     height: 20px;
-    filter: brightness(0) invert(1);
 }
 
 .mosque-content {
@@ -150,7 +162,7 @@
 
 .transaction-item {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 0.5fr 1fr auto;
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-md);
@@ -178,6 +190,11 @@
     color: var(--error);
 }
 
+.transaction-date {
+    color: var(--text-light);
+    font-size: 0.875rem;
+}
+
 .transaction-amount {
     font-weight: 600;
 }
@@ -196,6 +213,85 @@
     padding: var(--space-md);
 }
 
+/* abs */
+.auth-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* gap: var(--space-xl); */
+    margin: 0 0 50px 0;
+    background-color: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.2),
+        0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.auth-register-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    max-width: 1000px;
+    margin: 0 5%;
+    background-color: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+.auth-image {
+    display: flex;
+    align-items: center;
+    background-image: url("../assets/img/mosque2.jpg");
+    background-size: cover;
+    background-position: center;
+    padding: var(--space-lg);
+    position: relative;
+}
+
+.auth-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url("../assets/images/auth-pattern.png");
+    background-size: cover;
+    opacity: 0.1;
+}
+
+.auth-image img {
+    max-width: 80%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.auth-form-container {
+    padding: var(--space-lg);
+}
+
+.auth-form-header:not(.header-login) {
+    display: none;
+}
+
+.auth-form-header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    margin-bottom: 50px;
+}
+
+.auth-form-header h1 {
+    color: var(--primary-dark);
+    margin-bottom: var(--space-xs);
+}
+
+.auth-form-header p {
+    color: var(--text-medium);
+}
+
 @media (min-width: 768px) {
     .mosque-info {
         grid-template-columns: 300px 1fr;
@@ -203,6 +299,10 @@
 
     .mosque-image {
         margin: 0;
+    }
+
+    .auth-content {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 

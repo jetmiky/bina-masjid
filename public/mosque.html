@@ -4,7 +4,10 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mosque Profile - Bina Masjid Digital</title>
+        <link rel="icon" href="assets/img/logo.png" type="image/x-icon" />
         <link rel="stylesheet" href="./css/style.css" />
+        <link rel="stylesheet" href="./css/header.css" />
+        <link rel="stylesheet" href="./css/mobile-navbar.css" />
         <link rel="stylesheet" href="./css/mosque.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap"
@@ -17,37 +20,44 @@
 
             <main>
                 <section class="mosque-header">
-                    <div class="container">
-                        <div class="mosque-info">
-                            <div class="mosque-image">
-                                <img
-                                    src="https://images.pexels.com/photos/2869215/pexels-photo-2869215.jpeg"
-                                    alt="Mosque"
-                                />
-                            </div>
-                            <div class="mosque-details">
-                                <h1 id="mosqueName">Loading...</h1>
-                                <div class="mosque-meta">
-                                    <p id="mosqueAddress">
-                                        <img src="./assets/icons/location.svg" alt="Location" />
-                                        Loading...
-                                    </p>
-                                    <p id="mosquePhone">
-                                        <img src="./assets/icons/phone.svg" alt="Phone" />
-                                        Loading...
-                                    </p>
-                                    <p id="mosqueEmail">
-                                        <img src="./assets/icons/email.svg" alt="Email" />
-                                        Loading...
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="mosque-container">
+                        <h1 id="mosqueName">Mosque [Mosque Name]</h1>
+                        <p id="mosque-description">
+                            Find detailed information about this mosque and its digital activities
+                            with Bina Masjid Digital.
+                        </p>
                     </div>
                 </section>
 
                 <section class="mosque-content">
                     <div class="container">
+                        <div class="auth-content mosque">
+                            <div class="auth-image"></div>
+                            <div class="auth-form-container">
+                                <div class="auth-form-header header-login">
+                                    <h1 id="mosqueName2">Loading...</h1>
+                                </div>
+                                <div class="mosque-details">
+                                    <div class="mosque-meta">
+                                        <p id="mosqueAddress">
+                                            <img
+                                                src="./assets/img/icon/location.png"
+                                                alt="Location"
+                                            />
+                                            Loading...
+                                        </p>
+                                        <p id="mosquePhone">
+                                            <img src="./assets/img/icon/contact2.png" alt="Phone" />
+                                            Loading...
+                                        </p>
+                                        <p id="mosqueEmail">
+                                            <img src="./assets/img/icon/email.png" alt="Email" />
+                                            Loading...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="content-grid">
                             <div class="announcements-section">
                                 <h2>Recent Announcements</h2>
@@ -61,11 +71,11 @@
                                 <div class="financial-summary">
                                     <div class="summary-card">
                                         <h3>Total Donations</h3>
-                                        <p class="amount" id="totalDonations">$0</p>
+                                        <p class="amount" id="totalDonations">Rp 0</p>
                                     </div>
                                     <div class="summary-card">
                                         <h3>Total Expenses</h3>
-                                        <p class="amount" id="totalExpenses">$0</p>
+                                        <p class="amount" id="totalExpenses">Rp 0</p>
                                     </div>
                                 </div>
 
@@ -82,8 +92,10 @@
                                                 <input type="date" id="endDate" required />
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">
-                                            <img src="./assets/icons/download.svg" alt="Download" />
+                                        <button
+                                            type="submit"
+                                            class="button-div width-full button-primary"
+                                        >
                                             Export PDF
                                         </button>
                                     </form>
@@ -102,6 +114,7 @@
             </main>
 
             <div id="footer-placeholder"></div>
+            <div id="mobile-navbar-placeholder"></div>
         </div>
 
         <script src="./js/jquery.min.js"></script>

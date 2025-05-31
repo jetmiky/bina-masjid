@@ -30,9 +30,11 @@ $(document).ready(() => {
         $("#transaction-form").addClass("hidden");
         $(".transactions-list").show();
     });
-});
 
-function logout() {
-    window.auth.logout();
-    window.location.href = "/login.html";
-}
+    $("#mobile-logged-navbar-placeholder").load("../components/mobile-navbar-login.html");
+
+    $("#js-logout").on("click", () => {
+        window.auth.logout();
+        window.location.href = "/login.html";
+    });
+});

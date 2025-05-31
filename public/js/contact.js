@@ -54,3 +54,31 @@ $(document).ready(() => {
         }
     });
 });
+
+// abs
+const textarea = document.getElementById('message');
+
+textarea.addEventListener('focus', () => {
+    if (textarea.value.trim() === '') {
+        textarea.style.height = '126px'; // approx. 3 lines
+    } else {
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px'; // fit content height
+  }
+});
+
+// Shrink or auto-fit on blur
+textarea.addEventListener('blur', () => {
+  if (textarea.value.trim() === '') {
+    textarea.style.height = '42px'; // back to 1 line
+  } else {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px'; // fit content height
+  }
+});
+
+// Optional: auto-adjust while typing
+textarea.addEventListener('input', () => {
+  textarea.style.height = 'auto';
+  textarea.style.height = textarea.scrollHeight + 'px';
+});

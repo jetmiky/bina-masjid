@@ -4,6 +4,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Financial Records - Bina Masjid Digital</title>
+        <link rel="icon" href="../assets/img/logo.png" type="image/x-icon" />
+        <link rel="stylesheet" href="../css/mobile-navbar.css" />
         <link rel="stylesheet" href="../css/style.css" />
         <link rel="stylesheet" href="../css/admin.css" />
         <link
@@ -13,54 +15,65 @@
     </head>
     <body class="admin-body">
         <div class="admin-wrapper">
-            <aside class="admin-sidebar">
+            <aside class="admin-sidebar sidebar-collapsible">
                 <div class="sidebar-header">
                     <img
-                        src="../assets/icons/logo.svg"
+                        src="../assets/img/logo.png"
                         alt="Bina Masjid Digital"
                         class="sidebar-logo"
                     />
-                    <h2>Admin Panel</h2>
+                    <a href="/index.html" class="logo-title link">
+                        <h2 class="sidebar-title">Bina Masjid</h2>
+                    </a>
                 </div>
 
                 <nav class="sidebar-nav">
                     <ul>
                         <li>
-                            <a href="dashboard.html" class="nav-item">
-                                <img src="../assets/icons/dashboard.svg" alt="Dashboard" />
-                                Dashboard
+                            <a href="/404.html" class="nav-item">
+                                <img src="../assets/img/icon/dashboard-white.png" alt="Dashboard" />
+                                <span class="nav-label">Dashboard</span>
                             </a>
                         </li>
                         <li>
                             <a href="profile.html" class="nav-item">
-                                <img src="../assets/icons/profile.svg" alt="Profile" />
-                                Profile
+                                <img src="../assets/img/icon/user-white.png" alt="Profile" />
+                                <span class="nav-label">Profile</span>
                             </a>
                         </li>
                         <li>
                             <a href="announcements.html" class="nav-item">
-                                <img src="../assets/icons/announcement.svg" alt="Announcements" />
-                                Announcements
+                                <img
+                                    src="../assets/img/icon/announcement-white.png"
+                                    alt="Announcements"
+                                />
+                                <span class="nav-label">Announcements</span>
                             </a>
                         </li>
                         <li>
                             <a href="finances.html" class="nav-item active">
-                                <img src="../assets/icons/finance.svg" alt="Finances" />
-                                Financial Records
+                                <img src="../assets/img/icon/wallet-white.png" alt="Finances" />
+                                <span class="nav-label">Financial Records</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a id="js-logout" href="#" class="nav-item" style="margin-top: 2rem">
+                                <img src="../assets/img/icon/user-white.png" alt="Logout" />
+                                <span class="nav-label">Log Out</span>
                             </a>
                         </li>
                     </ul>
                 </nav>
             </aside>
-
             <div class="admin-content">
-                <header class="admin-header">
+                <header class="admin-header-modern">
                     <div class="header-search">
-                        <input type="search" placeholder="Search transactions..." />
+                        <input type="search" placeholder="Search..." />
                     </div>
 
                     <div class="header-actions">
-                        <button class="notifications-btn">
+                        <button class="notifications-btn" aria-label="Notifications">
                             <img src="../assets/icons/bell.svg" alt="Notifications" />
                             <span class="notification-badge">3</span>
                         </button>
@@ -68,26 +81,49 @@
                         <div class="user-menu">
                             <img
                                 src="https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg"
-                                alt="User"
+                                alt="User Avatar"
                                 class="user-avatar"
                             />
-                            <span class="user-name">Ahmad Rahman</span>
+                            <div class="user-info">
+                                <span class="user-name">Ahmad Rahman</span>
+                                <span class="user-role">Administrator</span>
+                            </div>
                         </div>
                     </div>
                 </header>
 
                 <main class="admin-main">
-                    <div class="page-header">
-                        <h1>Financial Records</h1>
-                        <div class="header-actions">
-                            <button class="btn btn-outline" id="export-pdf">
-                                <img src="../assets/icons/download.svg" alt="Export" />
-                                Export PDF
-                            </button>
-                            <button class="btn btn-primary" id="new-transaction-btn">
-                                <img src="../assets/icons/plus.svg" alt="Add" />
-                                New Transaction
-                            </button>
+                    <div class="page-header-modern">
+                        <div class="header-icon">
+                            <img src="../assets/img/icon/wallet-white2.png" alt="Finance Icon" />
+                        </div>
+
+                        <div class="header-text">
+                            <h1>Financial Records</h1>
+                            <p>
+                                Record and manage your mosque’s financial reports accurately. Keep
+                                track of income and expenses to ensure transparency and
+                                accountability.
+                            </p>
+                        </div>
+
+                        <div class="qr-section" id="export-pdf">
+                            <img
+                                id="js-add-finance"
+                                src="../assets/img/icon/pdf.png"
+                                alt="Export"
+                                class="qr-icon"
+                            />
+                            <span class="qr-label">Export pdf</span>
+                        </div>
+                        <div class="qr-section" id="new-transaction-btn">
+                            <img
+                                id="js-add-finance"
+                                src="../assets/img/icon/plus.png"
+                                alt="Add Finance"
+                                class="qr-icon"
+                            />
+                            <span class="qr-label">New Record</span>
                         </div>
                     </div>
 
@@ -95,38 +131,22 @@
                         <div class="finance-summary">
                             <div class="summary-card">
                                 <h3>Total Donations</h3>
-                                <p class="amount">$25,750</p>
-                                <span class="trend positive">+12.5% this month</span>
+                                <p id="js-income" class="amount">Rp 0</p>
                             </div>
 
                             <div class="summary-card">
                                 <h3>Total Expenses</h3>
-                                <p class="amount">$18,320</p>
-                                <span class="trend negative">+8.3% this month</span>
+                                <p id="js-expense" class="amount">Rp 0</p>
                             </div>
 
                             <div class="summary-card">
                                 <h3>Current Balance</h3>
-                                <p class="amount">$7,430</p>
-                                <span class="trend positive">+15.2% this month</span>
+                                <p id="js-net-balance" class="amount">Rp 0</p>
                             </div>
-                        </div>
-
-                        <div class="finance-chart">
-                            <canvas id="financeChart"></canvas>
                         </div>
 
                         <div class="transactions-list">
-                            <h2>Recent Transactions</h2>
-                            <div class="transaction-filters">
-                                <select id="transaction-type">
-                                    <option value="all">All Transactions</option>
-                                    <option value="donation">Donations</option>
-                                    <option value="expense">Expenses</option>
-                                </select>
-
-                                <input type="date" id="date-filter" />
-                            </div>
+                            <h2>Transactions</h2>
 
                             <table class="transactions-table">
                                 <thead>
@@ -138,106 +158,104 @@
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>2025-02-15</td>
-                                        <td>Friday Prayer Donation</td>
-                                        <td><span class="badge donation">Donation</span></td>
-                                        <td class="amount positive">+$1,200</td>
-                                        <td>
-                                            <button class="btn btn-icon">
-                                                <img src="../assets/icons/edit.svg" alt="Edit" />
-                                            </button>
-                                            <button class="btn btn-icon">
-                                                <img
-                                                    src="../assets/icons/delete.svg"
-                                                    alt="Delete"
-                                                />
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2025-02-14</td>
-                                        <td>Utility Bills</td>
-                                        <td><span class="badge expense">Expense</span></td>
-                                        <td class="amount negative">-$450</td>
-                                        <td>
-                                            <button class="btn btn-icon">
-                                                <img src="../assets/icons/edit.svg" alt="Edit" />
-                                            </button>
-                                            <button class="btn btn-icon">
-                                                <img
-                                                    src="../assets/icons/delete.svg"
-                                                    alt="Delete"
-                                                />
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                <tbody></tbody>
                             </table>
                         </div>
 
                         <div class="transaction-form hidden" id="transaction-form">
-                            <h2>New Transaction</h2>
-                            <form class="admin-form">
-                                <div class="form-group">
-                                    <label for="transaction-description">Description</label>
-                                    <input type="text" id="transaction-description" required />
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="transaction-amount">Amount</label>
-                                        <input
-                                            type="number"
-                                            id="transaction-amount"
-                                            min="0"
-                                            step="0.01"
-                                            required
-                                        />
+                            <div class="auth-content login">
+                                <div class="auth-image finance"></div>
+                                <div class="auth-form-container">
+                                    <div class="auth-form-header header-login">
+                                        <h1>New Transaction</h1>
+                                        <p>
+                                            Create and manage financial records to ensure
+                                            transparency and support better decision-making.
+                                        </p>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="transaction-type">Type</label>
-                                        <select id="transaction-type" required>
-                                            <option value="donation">Donation</option>
-                                            <option value="expense">Expense</option>
-                                        </select>
-                                    </div>
+                                    <form id="transaction-form" class="auth-form">
+                                        <div class="form__group field">
+                                            <input
+                                                type="input"
+                                                class="form__field"
+                                                placeholder="Description"
+                                                name="transaction-description"
+                                                id="transaction-description"
+                                                required
+                                            />
+                                            <label for="transaction-description" class="form__label"
+                                                >Description</label
+                                            >
+                                        </div>
+                                        <div class="form__group field">
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                step="0.01"
+                                                class="form__field"
+                                                placeholder="Transaction Amount"
+                                                name="transaction-amount"
+                                                id="transaction-amount"
+                                                required
+                                            />
+                                            <label for="transaction-amount" class="form__label"
+                                                >Transaction Amount</label
+                                            >
+                                        </div>
+                                        <div class="form__group field">
+                                            <select
+                                                class="form__field"
+                                                name="transaction-type"
+                                                id="transaction-type"
+                                                required
+                                            >
+                                                <option value="" disabled selected hidden></option>
+                                                <option value="income">Income</option>
+                                                <option value="expense">Expense</option>
+                                            </select>
+                                            <label
+                                                for="transaction-type"
+                                                class="select__form__label form__label"
+                                                >Transaction Type</label
+                                            >
+                                        </div>
+                                        <div class="form__group field">
+                                            <input
+                                                type="date"
+                                                class="form__field"
+                                                placeholder="Transaction Amount"
+                                                name="transaction-date"
+                                                id="transaction-date"
+                                                required
+                                            />
+                                            <label for="transaction-date" class="form__label"
+                                                >Transaction Date</label
+                                            >
+                                        </div>
+                                        <div class="button-group">
+                                            <button type="submit" class="button-div button-primary">
+                                                Save Transaction
+                                            </button>
+                                            <button
+                                                type="button"
+                                                id="cancel-transaction"
+                                                class="button-div button-secondary"
+                                            >
+                                                Close
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="transaction-date">Date</label>
-                                    <input type="date" id="transaction-date" required />
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="transaction-notes">Notes</label>
-                                    <textarea id="transaction-notes" rows="3"></textarea>
-                                </div>
-
-                                <div class="form-actions">
-                                    <button type="submit" class="btn btn-primary">
-                                        Save Transaction
-                                    </button>
-                                    <button
-                                        type="button"
-                                        class="btn btn-outline"
-                                        id="cancel-transaction"
-                                    >
-                                        Cancel
-                                    </button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </main>
+                <div id="mobile-logged-navbar-placeholder"></div>
             </div>
         </div>
 
         <script src="../js/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/moment"></script>
         <script src="../js/core/auth.js"></script>
         <script src="../js/core/config.js"></script>
         <script src="../js/admin.js"></script>

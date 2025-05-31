@@ -20,6 +20,7 @@ $(document).ready(() => {
     });
 
     $("#footer-placeholder").load("./components/footer.html");
+    $("#mobile-navbar-placeholder").load("./components/mobile-navbar.html");
 
     // Initialize animations
     initAnimations();
@@ -62,3 +63,50 @@ function initAnimations() {
         handleScrollAnimations();
     });
 }
+
+//header style changer by scroll
+window.addEventListener('scroll', function () {
+  const screenWidth = window.innerWidth;
+  const header = document.querySelector('.header');
+  const menus = document.querySelectorAll('.menu');
+  const logoTitle = document.querySelector('.logo-title');
+  const navigasi = document.querySelector('.navigasi');
+
+  if (window.scrollY > 50) {
+    header.style.backgroundColor = 'rgba(0,0,0,0.7)'; 
+    menus.forEach(menu => menu.classList.add('scrolled'));
+    logoTitle.classList.add('scrolled');
+    navigasi.classList.add('scrolled');
+    navigasi.style.border = 'solid 2px #00ffff';
+  } else {
+    if (screenWidth > 790) {
+        header.style.backgroundColor = 'transparent';
+        menus.forEach(menu => menu.classList.remove('scrolled'));
+        logoTitle.classList.remove('scrolled');
+        navigasi.classList.remove('scrolled');
+        navigasi.style.border = 'solid 2px #000000';
+    }
+  }
+});
+
+window.addEventListener('resize', function () {
+    const screenWidth = window.innerWidth;
+    const header = document.querySelector('.header');
+    const menus = document.querySelectorAll('.menu');
+    const logoTitle = document.querySelector('.logo-title');
+    const navigasi = document.querySelector('.navigasi');
+    if (screenWidth > 790) {
+        header.style.backgroundColor = 'transparent';
+        menus.forEach(menu => menu.classList.remove('scrolled'));
+        logoTitle.classList.remove('scrolled');
+        navigasi.classList.remove('scrolled');
+        navigasi.style.border = 'solid 2px #000000';
+    } else {
+        header.style.backgroundColor = 'rgba(0,0,0,0.7)'; 
+        menus.forEach(menu => menu.classList.add('scrolled'));
+        logoTitle.classList.add('scrolled');
+        navigasi.classList.add('scrolled');
+        navigasi.style.border = 'solid 2px #00ffff';
+    }
+})
+

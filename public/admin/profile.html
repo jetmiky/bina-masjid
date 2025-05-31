@@ -4,7 +4,9 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Edit Profile - Bina Masjid Digital</title>
+        <link rel="icon" href="../assets/img/logo.png" type="image/x-icon" />
         <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../css/mobile-navbar.css" />
         <link rel="stylesheet" href="../css/admin.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap"
@@ -13,40 +15,52 @@
     </head>
     <body class="admin-body">
         <div class="admin-wrapper">
-            <aside class="admin-sidebar">
+            <aside class="admin-sidebar sidebar-collapsible">
                 <div class="sidebar-header">
                     <img
-                        src="../assets/icons/logo.svg"
+                        src="../assets/img/logo.png"
                         alt="Bina Masjid Digital"
                         class="sidebar-logo"
                     />
-                    <h2>Admin Panel</h2>
+                    <a href="/index.html" class="logo-title link">
+                        <h2 class="sidebar-title">Bina Masjid</h2>
+                    </a>
                 </div>
 
                 <nav class="sidebar-nav">
                     <ul>
                         <li>
-                            <a href="dashboard.html" class="nav-item">
-                                <img src="../assets/icons/dashboard.svg" alt="Dashboard" />
-                                Dashboard
+                            <a href="/404.html" class="nav-item">
+                                <img src="../assets/img/icon/dashboard-white.png" alt="Dashboard" />
+                                <span class="nav-label">Dashboard</span>
                             </a>
                         </li>
                         <li>
                             <a href="profile.html" class="nav-item active">
-                                <img src="../assets/icons/profile.svg" alt="Profile" />
-                                Profile
+                                <img src="../assets/img/icon/user-white.png" alt="Profile" />
+                                <span class="nav-label">Profile</span>
                             </a>
                         </li>
                         <li>
                             <a href="announcements.html" class="nav-item">
-                                <img src="../assets/icons/announcement.svg" alt="Announcements" />
-                                Announcements
+                                <img
+                                    src="../assets/img/icon/announcement-white.png"
+                                    alt="Announcements"
+                                />
+                                <span class="nav-label">Announcements</span>
                             </a>
                         </li>
                         <li>
                             <a href="finances.html" class="nav-item">
-                                <img src="../assets/icons/finance.svg" alt="Finances" />
-                                Financial Records
+                                <img src="../assets/img/icon/wallet-white.png" alt="Finances" />
+                                <span class="nav-label">Financial Records</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a id="js-logout" href="#" class="nav-item" style="margin-top: 2rem">
+                                <img src="../assets/img/icon/user-white.png" alt="Logout" />
+                                <span class="nav-label">Log Out</span>
                             </a>
                         </li>
                     </ul>
@@ -54,13 +68,13 @@
             </aside>
 
             <div class="admin-content">
-                <header class="admin-header">
+                <header class="admin-header-modern">
                     <div class="header-search">
                         <input type="search" placeholder="Search..." />
                     </div>
 
                     <div class="header-actions">
-                        <button class="notifications-btn">
+                        <button class="notifications-btn" aria-label="Notifications">
                             <img src="../assets/icons/bell.svg" alt="Notifications" />
                             <span class="notification-badge">3</span>
                         </button>
@@ -68,91 +82,147 @@
                         <div class="user-menu">
                             <img
                                 src="https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg"
-                                alt="User"
+                                alt="User Avatar"
                                 class="user-avatar"
                             />
-                            <span class="user-name">Ahmad Rahman</span>
+                            <div class="user-info">
+                                <span class="user-name">Ahmad Rahman</span>
+                                <span class="user-role">Administrator</span>
+                            </div>
                         </div>
                     </div>
                 </header>
 
                 <main class="admin-main">
-                    <div class="page-header">
-                        <h1>Edit Profile</h1>
-                        <p>Update your mosque's information and administrator details</p>
+                    <div class="page-header-modern">
+                        <div class="header-icon">
+                            <img src="../assets/img/icon/user-white.png" alt="Edit Profile Icon" />
+                        </div>
+
+                        <div class="header-text">
+                            <h1>Profile</h1>
+                            <p>
+                                Manage mosque information and admin data easily. Ensure your data is
+                                always accurate for more optimal service.
+                            </p>
+                        </div>
+
+                        <div class="qr-section">
+                            <img
+                                id="js-get-qr"
+                                src="../assets/img/icon/qrcode.png"
+                                alt="QR Code"
+                                class="qr-icon"
+                            />
+                            <span class="qr-label">Get QR Code</span>
+                        </div>
                     </div>
 
                     <div class="content-grid">
-                        <div class="profile-section">
-                            <h2>Mosque Information</h2>
-                            <form class="admin-form">
-                                <div class="form-group">
-                                    <label for="mosque-name">Mosque Name</label>
-                                    <input type="text" id="mosque-name" value="Al-Falah Mosque" />
-                                </div>
+                        <form id="profile-form" class="auth-form" novalidate>
+                            <div class="auth-content login">
+                                <div class="auth-image profile"></div>
+                                <div class="auth-form-container left-panel">
+                                    <div class="form-section">
+                                        <h2>Mosque Information</h2>
+                                        <div class="form__group field">
+                                            <input
+                                                type="text"
+                                                class="form__field"
+                                                placeholder="Masjid Bina Digital Nusantara"
+                                                name="mosqueName"
+                                                id="mosque-name"
+                                                required
+                                            />
+                                            <label for="mosque-name" class="form__label"
+                                                >Mosque Name</label
+                                            >
+                                        </div>
 
-                                <div class="form-group">
-                                    <label for="mosque-address">Address</label>
-                                    <input
-                                        type="text"
-                                        id="mosque-address"
-                                        value="123 Islamic Street"
-                                    />
-                                </div>
+                                        <div class="form__group field">
+                                            <input
+                                                type="tel"
+                                                class="form__field"
+                                                placeholder="0219991234"
+                                                name="mosquePhone"
+                                                id="mosque-phone"
+                                                required
+                                            />
+                                            <label for="mosque-phone" class="form__label"
+                                                >Phone Number</label
+                                            >
+                                        </div>
 
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="mosque-city">City</label>
-                                        <input
-                                            type="text"
-                                            id="mosque-city"
-                                            value="Silicon Valley"
-                                        />
+                                        <div class="form__group field">
+                                            <input
+                                                type="text"
+                                                class="form__field"
+                                                placeholder="Jalan Bina Masjid No. 3"
+                                                name="mosqueAddress"
+                                                id="mosque-address"
+                                                required
+                                            />
+                                            <label for="mosque-address" class="form__label"
+                                                >Street Address</label
+                                            >
+                                        </div>
+
+                                        <div class="form__group field">
+                                            <input
+                                                type="text"
+                                                class="form__field"
+                                                placeholder="Jakarta Timur"
+                                                name="mosqueCity"
+                                                id="mosque-city"
+                                                required
+                                            />
+                                            <label for="mosque-city" class="form__label"
+                                                >City</label
+                                            >
+                                        </div>
+
+                                        <div class="form__group field">
+                                            <input
+                                                type="text"
+                                                class="form__field"
+                                                placeholder="DKI Jakarta"
+                                                name="mosqueProvince"
+                                                id="mosque-province"
+                                                required
+                                            />
+                                            <label for="mosque-province" class="form__label"
+                                                >Province</label
+                                            >
+                                        </div>
+
+                                        <div class="form__group field">
+                                            <input
+                                                type="text"
+                                                class="form__field"
+                                                placeholder="10710"
+                                                name="mosquePostal"
+                                                id="mosque-postal"
+                                                required
+                                            />
+                                            <label for="mosque-postal" class="form__label"
+                                                >Postal/Zip Code</label
+                                            >
+                                        </div>
+
+                                        <button
+                                            type="submit"
+                                            class="button-div button-primary width-full"
+                                        >
+                                            Save Changes
+                                        </button>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="mosque-state">State</label>
-                                        <input type="text" id="mosque-state" value="California" />
-                                    </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="mosque-phone">Phone Number</label>
-                                    <input type="tel" id="mosque-phone" value="+1 (234) 567-8900" />
-                                </div>
-
-                                <button type="submit" class="btn btn-primary">Save Changes</button>
-                            </form>
-                        </div>
-
-                        <div class="profile-section">
-                            <h2>Account Information</h2>
-                            <form class="admin-form">
-                                <div class="form-group">
-                                    <label for="admin-email">Email Address</label>
-                                    <input
-                                        type="email"
-                                        id="admin-email"
-                                        value="ahmad@alfalah.com"
-                                    />
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="admin-phone">Phone Number</label>
-                                    <input type="tel" id="admin-phone" value="+1 (234) 567-8901" />
-                                </div>
-
-                                <button type="submit" class="btn btn-primary">Save Changes</button>
-                            </form>
-                        </div>
-
-                        <div class="profile-section">
-                            <button id="js-get-qr" class="btn btn-primary">
-                                Get Profile QR Code
-                            </button>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </main>
+
+                <div id="mobile-logged-navbar-placeholder"></div>
             </div>
         </div>
 

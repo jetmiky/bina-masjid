@@ -1,0 +1,94 @@
+/* Sembunyikan navbar secara default di layar besar */
+#smartbar {
+	display: none;
+}
+
+.icon-img {
+  width: 22px;
+  height: 22px;
+  margin-bottom: 3px;
+  display: block;
+}
+
+/* Tampilkan dan tata modern hanya di layar < 768px */
+@media (max-width: 790px) {
+	#smartbar {
+		display: flex;
+		width: 100%;
+		bottom: 0;
+		left: 0;
+		position: fixed;
+		background-color: #014350;
+		height: 70px;
+		border-top-left-radius: 12px;
+		border-top-right-radius: 12px;
+		box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+		z-index: 1000;
+	}
+
+	#menubawah {
+		display: flex;
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+
+	.nav-item {
+		flex: 1;
+		text-align: center;
+	}
+
+	.nav-item a {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
+		color: #00ffff;
+		font-size: 13px;
+		height: 70px;
+		transition: background 0.2s ease;
+	}
+
+	.nav-item:hover:not(.center-button) {
+		background-color: #019191
+	}
+
+	.icon {
+		font-size: 22px;
+		margin-bottom: 2px;
+		line-height: 1;
+	}
+
+	.label {
+		font-size: 11px;
+		color: #00ffff;
+	}
+
+	.nav-item a:hover .icon,
+	.nav-item a:hover .label {
+		color: white;
+	}
+
+	.center-button {
+		position: relative;
+		top: -20px;
+		z-index: 1100;
+	}
+
+	.play-now-icon {
+		width: 60px;
+		height: 60px;
+		border-radius: 50%;
+		border: solid 5px #006663;
+		background-image: linear-gradient(to top, rgba(218, 116, 6, 0.8), rgba(255, 183, 94, 0.7));
+		padding: 10px;
+		box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+		color: #0d001e;
+	}
+
+    .play-now-icon:hover {
+        background-image: linear-gradient(to top, rgba(17, 153, 142, 0.7), rgba(255, 255, 255, 1));
+    }
+}

@@ -36,24 +36,18 @@ $(document).ready(() => {
 function loadMosqueDetails(mosqueId) {
     $.ajax(`/mosques/${mosqueId}`, {
         success: (response) => {
-            console.log(response.data);
-
-            const mosque = {
-                name: "Al-Falah Mosque",
-                address: "123 Islamic Street, Silicon Valley, CA 94000",
-                phone: "+1 (234) 567-8900",
-                email: "info@alfalah.com",
-            };
+            const mosque = response.data;
 
             $("#mosqueName").text(mosque.name);
+            $("#mosqueName2").text(mosque.name);
             $("#mosqueAddress").html(
-                `<img src="./assets/icons/location.svg" alt="Location"> ${mosque.address}`,
+                `<img src="./assets/img/icon/location.png" alt="Location"> ${mosque.address.street}, ${mosque.address.city}, ${mosque.address.province} ${mosque.address.zip}`,
             );
             $("#mosquePhone").html(
-                `<img src="./assets/icons/phone.svg" alt="Phone"> ${mosque.phone}`,
+                `<img src="./assets/img/icon/contact2.png" alt="Phone"> ${mosque.phone}`,
             );
             $("#mosqueEmail").html(
-                `<img src="./assets/icons/email.svg" alt="Email"> ${mosque.email}`,
+                `<img src="./assets/img/icon/email.png" alt="Email"> ${mosque.email}`,
             );
         },
         error: (e) => {
@@ -64,98 +58,96 @@ function loadMosqueDetails(mosqueId) {
 }
 
 function loadAnnouncements(mosqueId) {
-    // Simulated API call - Replace with actual API endpoint
-    setTimeout(() => {
-        const announcements = [
-            {
-                title: "Eid Prayer Time Change",
-                content:
-                    "Due to expected high attendance, Eid prayer will now be held at 7:30 AM instead of 8:00 AM.",
-                date: "2024-02-15",
-            },
-            {
-                title: "Weekly Islamic Studies Class",
-                content: "New Islamic Studies class starting this Saturday after Maghrib prayer.",
-                date: "2024-02-12",
-            },
-        ];
+    $.ajax({
+        url: `/mosques/${mosqueId}/announcements`,
+        success: (response) => {
+            const announcements = response.data;
 
-        const announcementsHtml = announcements
-            .map(
-                (announcement) => `
-          <div class="announcement-card">
-              <p class="announcement-date">${formatDate(announcement.date)}</p>
-              <h3 class="announcement-title">${announcement.title}</h3>
-              <p>${announcement.content}</p>
-          </div>
-      `,
-            )
-            .join("");
+            if (announcements.length) {
+                const announcementsHtml = announcements
+                    .map(
+                        (announcement) => `
+                            <div class="announcement-card">
+                                <h3 class="announcement-title">${announcement.title}</h3>
+                                <p>${announcement.description}</p>
+                            </div>
+                        `,
+                    )
+                    .join("");
 
-        $("#announcementsList").html(announcementsHtml);
-    }, 1000);
+                $("#announcementsList").html(announcementsHtml);
+            } else {
+                $("#announcementsList").html("<p>No announcements created yet.</p>");
+            }
+        },
+        error: (e) => {
+            console.error(e.responseJSON.message);
+        },
+    });
 }
 
 function loadFinancialData(mosqueId) {
-    // Simulated API call - Replace with actual API endpoint
-    setTimeout(() => {
-        const financialData = {
-            totalDonations: 25750,
-            totalExpenses: 18320,
-            recentTransactions: [
-                {
-                    date: "2024-02-15",
-                    description: "Friday Prayer Donation",
-                    type: "donation",
-                    amount: 1200,
-                },
-                {
-                    date: "2024-02-14",
-                    description: "Utility Bills",
-                    type: "expense",
-                    amount: -450,
-                },
-            ],
-        };
+    $.ajax(`/mosques/${mosqueId}/finances`, {
+        success: (response) => {
+            const { records, total } = response.data;
 
-        $("#totalDonations").text(`$${financialData.totalDonations.toLocaleString()}`);
-        $("#totalExpenses").text(`$${financialData.totalExpenses.toLocaleString()}`);
+            if (records.length) {
+                $("#totalDonations").text(`+ ${formatCurrency(total.income)}`);
+                $("#totalExpenses").text(`- ${formatCurrency(total.expense)}`);
 
-        const transactionsHtml = financialData.recentTransactions
-            .map(
-                (transaction) => `
-          <div class="transaction-item">
-              <span class="transaction-type ${transaction.type}">${capitalizeFirst(transaction.type)}</span>
-              <span class="transaction-description">${transaction.description}</span>
-              <span class="transaction-amount ${transaction.amount > 0 ? "positive" : "negative"}">
-                  ${formatCurrency(transaction.amount)}
-              </span>
-          </div>
-      `,
-            )
-            .join("");
+                const transactionsHtml = records
+                    .map(
+                        (transaction) => `
+                            <div class="transaction-item">
+                                <span class="transaction-type ${transaction.type === "expense" ? "expense" : "donation"}">${capitalizeFirst(transaction.type)}</span>
+                                <span class="transaction-date">${formatDate(transaction.date)}</span>
+                                <span class="transaction-description">${transaction.description}</span>
+                                <span class="transaction-amount ${transaction.amount > 0 ? "positive" : "negative"}">
+                                    ${formatCurrency(transaction.amount)}
+                                </span>
+                            </div>
+                        `,
+                    )
+                    .join("");
 
-        $("#transactionsList").html(transactionsHtml);
-    }, 1000);
+                $("#transactionsList").html(transactionsHtml);
+            } else {
+                $("#transactionsList").html(
+                    `<div class="transaction-item">
+                        <p>No transaction yet</p>
+                    </div>`,
+                );
+            }
+        },
+    });
 }
 
 function exportFinancialReport(mosqueId, startDate, endDate) {
-    // Simulated API call - Replace with actual API endpoint
     const btn = $("#exportForm button").html("Generating PDF...").prop("disabled", true);
 
-    setTimeout(() => {
-        // In a real implementation, this would trigger a PDF download
-        alert("PDF report generated and downloaded successfully!");
-        btn.html('<img src="./assets/icons/download.svg" alt="Download"> Export PDF').prop(
-            "disabled",
-            false,
-        );
-    }, 2000);
+    $.ajax(`/mosques/${mosqueId}/finances/report?start_date=${startDate}&end_date=${endDate}`, {
+        xhrFields: {
+            responseType: "blob",
+        },
+        success: (blob) => {
+            const link = document.createElement("a");
+            link.href = window.URL.createObjectURL(blob);
+            link.download = "FinanceReport.pdf";
+            link.click();
+
+            link.remove();
+
+            btn.html("Export PDF").prop("disabled", false);
+        },
+        error: (e) => {
+            alert("Failed getting Finance Report.");
+            console.error(e.responseJSON.message);
+        },
+    });
 }
 
-// Helper functions
 function formatDate(dateStr) {
-    return new Date(dateStr).toLocaleDateString("en-US", {
+    return new Date(dateStr).toLocaleDateString("id-ID", {
         year: "numeric",
         month: "long",
         day: "numeric",
@@ -163,7 +155,7 @@ function formatDate(dateStr) {
 }
 
 function formatCurrency(amount) {
-    return `${amount >= 0 ? "+" : ""}$${Math.abs(amount).toLocaleString()}`;
+    return `Rp ${amount.toLocaleString("id-ID")}`;
 }
 
 function capitalizeFirst(str) {

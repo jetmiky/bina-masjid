@@ -4,7 +4,10 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>About Us - Bina Masjid Digital</title>
+        <link rel="icon" href="assets/img/logo.png" type="image/x-icon">
         <link rel="stylesheet" href="./css/style.css" />
+        <link rel="stylesheet" href="./css/mobile-navbar.css" />
+        <link rel="stylesheet" href="./css/header.css" />
         <link rel="stylesheet" href="./css/about.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap"
@@ -17,8 +20,8 @@
             <div id="header-placeholder"></div>
 
             <main>
-                <section class="page-header">
-                    <div class="container">
+                <section class="about-header">
+                    <div class="about-container">
                         <h1>About Bina Masjid Digital</h1>
                         <p>
                             Learn about our mission to digitize mosque management across the world
@@ -140,48 +143,61 @@
                             </div>
                         </div>
 
-                        <div class="team-section">
-                            <h2 class="section-title">Meet Our Team</h2>
-                            <div class="team-grid">
+                        <div class="team-sections panel">
+                            <h2 class="section-title text-turqoise">Our Team</h2>
+                            <hr class="line">
+                            <div class="team-container">
                                 <div class="team-member">
-                                    <div class="member-image">
-                                        <img
-                                            src="https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg"
-                                            alt="Team Member"
-                                        />
+                                    <div class="member-photo">
+                                        <img src="assets/img/team/Front-end.jpeg" alt="CEO" class="member-img">
                                     </div>
-                                    <h3>Ahmad Rahman</h3>
-                                    <p class="member-role">Founder & CEO</p>
+                                    <div class="member-info">
+                                        <h3 class="member-name">Agung B Saputro</h3>
+                                        <div class="divider"></div>
+                                        <p class="text-green text-bold position">Front-end Developer</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="team-member">
+                                    <div class="member-photo">
+                                        <img src="assets/img/team/Back-end.jpg" alt="CTO" class="member-img">
+                                    </div>
+                                    <div class="member-info">
+                                        <h3 class="member-name">Bimo Jatmiko A</h3>
+                                        <div class="divider"></div>
+                                        <p class="text-green text-bold position">Back-End Developer</p>
+                                    </div>
+                                </div>
+
+                                <div class="team-member">
+                                    <div class="member-photo">
+                                        <img src="assets/img/team/Founder.jpg" alt="CCO" class="member-img">
+                                    </div>
+                                    <div class="member-info">
+                                        <h3 class="member-name">Evans Yudi N</h3>
+                                        <div class="divider"></div>
+                                        <p class="text-green text-bold position">Founder</p>
+                                    </div>
                                 </div>
                                 <div class="team-member">
-                                    <div class="member-image">
-                                        <img
-                                            src="https://images.pexels.com/photos/3785074/pexels-photo-3785074.jpeg"
-                                            alt="Team Member"
-                                        />
+                                    <div class="member-photo">
+                                        <img src="assets/img/team/UIUXDesign.jpeg" alt="CCO" class="member-img">
                                     </div>
-                                    <h3>Fatima Hassan</h3>
-                                    <p class="member-role">Chief Technology Officer</p>
+                                    <div class="member-info">
+                                        <h3 class="member-name">Lugas Hartanto</h3>
+                                        <div class="divider"></div>
+                                        <p class="text-green text-bold position">UI/UX Designer</p>
+                                    </div>
                                 </div>
                                 <div class="team-member">
-                                    <div class="member-image">
-                                        <img
-                                            src="https://images.pexels.com/photos/3785083/pexels-photo-3785083.jpeg"
-                                            alt="Team Member"
-                                        />
+                                    <div class="member-photo">
+                                        <img src="assets/img/team/Community.jpg" alt="CCO" class="member-img">
                                     </div>
-                                    <h3>Yusuf Khan</h3>
-                                    <p class="member-role">Head of Design</p>
-                                </div>
-                                <div class="team-member">
-                                    <div class="member-image">
-                                        <img
-                                            src="https://images.pexels.com/photos/3785077/pexels-photo-3785077.jpeg"
-                                            alt="Team Member"
-                                        />
+                                    <div class="member-info">
+                                        <h3 class="member-name">Wiji Priyatna S</h3>
+                                        <div class="divider"></div>
+                                        <p class="text-green text-bold position">Outreach Coordinator</p>
                                     </div>
-                                    <h3>Aisha Malik</h3>
-                                    <p class="member-role">Community Manager</p>
                                 </div>
                             </div>
                         </div>
@@ -196,7 +212,7 @@
                                 Join hundreds of mosques already benefiting from our digital
                                 management solution.
                             </p>
-                            <a href="register.html" class="btn btn-primary">Register Your Mosque</a>
+                            <a href="register.html" class="button-div button-primary link text-white">Register Your Mosque</a>
                         </div>
                     </div>
                 </section>
@@ -204,6 +220,7 @@
 
             <!-- Footer will be loaded via jQuery -->
             <div id="footer-placeholder"></div>
+            <div id="mobile-navbar-placeholder"></div>
         </div>
 
         <script src="./js/jquery.min.js"></script>

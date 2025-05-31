@@ -4,7 +4,10 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Login - Bina Masjid Digital</title>
+        <link rel="icon" href="assets/img/logo.png" type="image/x-icon">
         <link rel="stylesheet" href="./css/style.css" />
+        <link rel="stylesheet" href="./css/header.css" />
+        <link rel="stylesheet" href="./css/mobile-navbar.css" />
         <link rel="stylesheet" href="./css/auth.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap"
@@ -19,44 +22,31 @@
             <main>
                 <section class="auth-container">
                     <div class="auth-content login">
-                        <div class="auth-image">
-                            <img
-                                src="https://images.pexels.com/photos/2869215/pexels-photo-2869215.jpeg"
-                                alt="Login Illustration"
-                            />
-                        </div>
+                        <div class="auth-image"></div>
                         <div class="auth-form-container">
-                            <div class="auth-form-header">
-                                <h1>Welcome Back</h1>
+                            <div class="auth-form-header header-login">
+                                <h1>Welcome</h1>
                                 <p>Log in to manage your mosque's digital presence</p>
                             </div>
 
                             <form id="login-form" class="auth-form">
-                                <div class="form-group">
-                                    <label for="email">Email Address</label>
-                                    <input type="email" id="email" name="email" required />
+                                <div class="form__group field">
+                                    <input type="input" class="form__field" placeholder="Email" name="email" id="email" required />
+                                    <label for="email" class="form__label">Email Address</label>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <div class="password-input">
-                                        <input
-                                            type="password"
-                                            id="password"
-                                            name="password"
-                                            required
-                                        />
-                                        <button
+                                <div class="form__group field">
+                                    <input type="password" class="form__field" placeholder="Password" name="password" id="password" required />
+                                     <button
                                             type="button"
                                             class="toggle-password"
                                             aria-label="Toggle password visibility"
                                         >
                                             <img src="./assets/icons/eye.svg" alt="Show password" />
                                         </button>
-                                    </div>
+                                    <label for="password" class="form__label">Password</label>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary btn-block">
+                                <button type="submit" class="button-div button-primary width-full">
                                     Log In
                                 </button>
 
@@ -73,6 +63,7 @@
 
             <!-- Footer will be loaded via jQuery -->
             <div id="footer-placeholder"></div>
+            <div id="mobile-navbar-placeholder"></div>
         </div>
 
         <script src="./js/jquery.min.js"></script>

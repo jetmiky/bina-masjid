@@ -1,42 +1,30 @@
-<header class="site-header">
-    <div class="container">
-        <div class="header-content">
+<header class="header">
+    <nav class="navbar">
+        <ul class="nav-links" id="navLinks">
             <div class="logo">
-                <a href="index.html">
-                    <img src="./assets/images/logo.png" alt="Bina Masjid Digital Logo" />
-                </a>
+                <img src="./assets/img/logo.png" alt="logo" class="logo-image" />
+                <a href="index.html" class="logo-title link">Bina Masjid</a>
             </div>
-
-            <nav class="main-nav">
-                <ul class="nav-list">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="about.html" class="nav-link">About Us</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+            <div class="nav-menu">
+                <li><a href="index.html" class="menu link menu-active">Home</a></li>
+                <li><a href="about.html" class="menu link menu-nonactive">About Us</a></li>
+                <li><a href="contact.html" class="menu link menu-nonactive">Contact</a></li>
+            </div>
+            <li class="auth-menu">
+                <ul class="menubar">
+                    <li class="menu-item">
+                        <a class="navigasi">Sign Up | Login</a>
+                        <ol class="sub-menu">
+                            <li class="menu-item">
+                                <a href="login.html" class="dropdown-btn"> Login </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="register.html" class="dropdown-btn"> Sign Up </a>
+                            </li>
+                        </ol>
+                    </li>
                 </ul>
-            </nav>
-
-            <div class="header-actions">
-                <a href="login.html" class="btn btn-outline">Log In</a>
-                <a href="register.html" class="btn btn-primary">Register</a>
-                <button class="mobile-menu-toggle" aria-label="Toggle menu">
-                    <img src="./assets/icons/menu.svg" alt="Menu" class="menu-icon" />
-                    <img src="./assets/icons/close.svg" alt="Close" class="close-icon" />
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div class="mobile-menu">
-        <nav class="mobile-nav">
-            <ul class="mobile-nav-list">
-                <li><a href="index.html" class="mobile-nav-link">Home</a></li>
-                <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
-                <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
-                <li class="mobile-auth">
-                    <a href="login.html" class="btn btn-outline">Log In</a>
-                    <a href="register.html" class="btn btn-primary">Register</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+            </li>
+        </ul>
+    </nav>
 </header>

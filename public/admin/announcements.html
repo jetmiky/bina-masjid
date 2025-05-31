@@ -4,6 +4,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Announcements - Bina Masjid Digital</title>
+        <link rel="icon" href="../assets/img/logo.png" type="image/x-icon" />
+        <link rel="stylesheet" href="../css/mobile-navbar.css" />
         <link rel="stylesheet" href="../css/style.css" />
         <link rel="stylesheet" href="../css/admin.css" />
         <link
@@ -13,40 +15,52 @@
     </head>
     <body class="admin-body">
         <div class="admin-wrapper">
-            <aside class="admin-sidebar">
+            <aside class="admin-sidebar sidebar-collapsible">
                 <div class="sidebar-header">
                     <img
-                        src="../assets/icons/logo.svg"
+                        src="../assets/img/logo.png"
                         alt="Bina Masjid Digital"
                         class="sidebar-logo"
                     />
-                    <h2>Bina Masjid Digital</h2>
+                    <a href="/index.html" class="logo-title link">
+                        <h2 class="sidebar-title">Bina Masjid</h2>
+                    </a>
                 </div>
 
                 <nav class="sidebar-nav">
                     <ul>
                         <li>
-                            <a href="dashboard.html" class="nav-item">
-                                <img src="../assets/icons/dashboard.svg" alt="Dashboard" />
-                                Dashboard
+                            <a href="/404.html" class="nav-item">
+                                <img src="../assets/img/icon/dashboard-white.png" alt="Dashboard" />
+                                <span class="nav-label">Dashboard</span>
                             </a>
                         </li>
                         <li>
                             <a href="profile.html" class="nav-item">
-                                <img src="../assets/icons/profile.svg" alt="Profile" />
-                                Profile
+                                <img src="../assets/img/icon/user-white.png" alt="Profile" />
+                                <span class="nav-label">Profile</span>
                             </a>
                         </li>
                         <li>
                             <a href="announcements.html" class="nav-item active">
-                                <img src="../assets/icons/announcement.svg" alt="Announcements" />
-                                Announcements
+                                <img
+                                    src="../assets/img/icon/announcement-white.png"
+                                    alt="Announcements"
+                                />
+                                <span class="nav-label">Announcements</span>
                             </a>
                         </li>
                         <li>
                             <a href="finances.html" class="nav-item">
-                                <img src="../assets/icons/finance.svg" alt="Finances" />
-                                Financial Records
+                                <img src="../assets/img/icon/wallet-white.png" alt="Finances" />
+                                <span class="nav-label">Financial Records</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a id="js-logout" href="#" class="nav-item" style="margin-top: 2rem">
+                                <img src="../assets/img/icon/user-white.png" alt="Logout" />
+                                <span class="nav-label">Log Out</span>
                             </a>
                         </li>
                     </ul>
@@ -54,13 +68,13 @@
             </aside>
 
             <div class="admin-content">
-                <header class="admin-header">
+                <header class="admin-header-modern">
                     <div class="header-search">
-                        <input type="search" placeholder="Search announcements..." />
+                        <input type="search" placeholder="Search..." />
                     </div>
 
                     <div class="header-actions">
-                        <button class="notifications-btn">
+                        <button class="notifications-btn" aria-label="Notifications">
                             <img src="../assets/icons/bell.svg" alt="Notifications" />
                             <span class="notification-badge">3</span>
                         </button>
@@ -68,59 +82,104 @@
                         <div class="user-menu">
                             <img
                                 src="https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg"
-                                alt="User"
+                                alt="User Avatar"
                                 class="user-avatar"
                             />
-                            <span class="user-name">Ahmad Rahman</span>
+                            <div class="user-info">
+                                <span class="user-name">Ahmad Rahman</span>
+                                <span class="user-role">Administrator</span>
+                            </div>
                         </div>
                     </div>
                 </header>
-
                 <main class="admin-main">
-                    <div class="page-header">
-                        <h1>Announcements</h1>
-                        <button class="btn btn-primary" id="new-announcement-btn">
-                            <img src="../assets/icons/plus.svg" alt="Add" />
-                            New Announcement
-                        </button>
+                    <div class="page-header-modern">
+                        <div class="header-icon">
+                            <img
+                                src="../assets/img/icon/announcement-white.png"
+                                alt="Edit Profile Icon"
+                            />
+                        </div>
+
+                        <div class="header-text">
+                            <h1>Announcement</h1>
+                            <p>
+                                Create and manage announcements effortlessly. Share important
+                                updates to keep your community informed and connected.
+                            </p>
+                        </div>
+                        <div class="qr-section" id="new-announcement-btn">
+                            <img
+                                id="js-get-qr"
+                                src="../assets/img/icon/plus.png"
+                                alt="QR Code"
+                                class="qr-icon"
+                            />
+                            <span class="qr-label">New Announcement</span>
+                        </div>
                     </div>
 
                     <div class="content-grid">
                         <div class="announcements-list"></div>
 
                         <div class="announcement-form hidden" id="announcement-form">
-                            <h2>New Announcement</h2>
-                            <form class="admin-form">
-                                <div class="form-group">
-                                    <label for="announcement-title">Title</label>
-                                    <input type="text" id="announcement-title" required />
-                                </div>
+                            <div class="auth-content login">
+                                <div class="auth-image announcement"></div>
+                                <div class="auth-form-container">
+                                    <div class="auth-form-header header-login">
+                                        <h1>Announcements</h1>
+                                        <p>
+                                            Create and manage announcements to keep your community
+                                            informed
+                                        </p>
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="announcement-content">Content</label>
-                                    <textarea
-                                        id="announcement-content"
-                                        rows="5"
-                                        required
-                                    ></textarea>
+                                    <form id="announcement-form" class="auth-form">
+                                        <div class="form__group field">
+                                            <input
+                                                type="input"
+                                                class="form__field"
+                                                placeholder="Announcement Title"
+                                                name="announcement-title"
+                                                id="announcement-title"
+                                                required
+                                            />
+                                            <label for="announcement-title" class="form__label"
+                                                >Announcement Title</label
+                                            >
+                                        </div>
+                                        <div class="form__group field">
+                                            <textarea
+                                                rows="1"
+                                                class="form__field"
+                                                placeholder="Your message"
+                                                name="announcement-content"
+                                                id="announcement-content"
+                                                required
+                                            ></textarea>
+                                            <label for="announcement-content" class="form__label"
+                                                >Content</label
+                                            >
+                                        </div>
+                                        <div class="button-group">
+                                            <button type="submit" class="button-div button-primary">
+                                                Post Announcement
+                                            </button>
+                                            <button
+                                                type="button"
+                                                id="cancel-announcement"
+                                                class="button-div button-secondary"
+                                            >
+                                                Close
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
-
-                                <div class="form-actions">
-                                    <button type="submit" class="btn btn-primary">
-                                        Post Announcement
-                                    </button>
-                                    <button
-                                        type="button"
-                                        class="btn btn-outline"
-                                        id="cancel-announcement"
-                                    >
-                                        Cancel
-                                    </button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </main>
+                <div id="mobile-logged-navbar-placeholder"></div>
             </div>
         </div>
 

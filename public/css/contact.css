@@ -1,4 +1,23 @@
 /* Contact Page Styles */
+.contact-header {
+    background-image:
+        url("../assets/img/Mosque.png"),
+        linear-gradient(to top, rgba(255, 183, 94, 0.7), rgba(255, 255, 255, 1));
+    background-size: cover;
+    color: #000000;
+    padding: var(--space-xl) 0;
+    text-align: center;
+    min-height: 50dvh;
+    display: flex;
+    align-items: center;
+}
+
+.contact-container {
+    width: 95%;
+    margin: 0 2.5%;
+    padding-top: 70px;
+}
+
 .contact-content {
     padding: var(--space-xl) 0;
 }
@@ -30,7 +49,7 @@
 }
 
 .contact-info p {
-    color: var(--text-medium);
+    color: rgba(255, 255, 255, 0.8);
     margin-bottom: var(--space-md);
     line-height: 1.6;
 }
@@ -137,12 +156,34 @@
 }
 
 .faq-question {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--space-md);
-    cursor: pointer;
-    transition: var(--transition);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md);
+  cursor: pointer;
+  transition: color 0.3s ease;
+  position: relative; /* penting untuk ::before */
+  overflow: hidden; /* agar ::before tidak meluber */
+  z-index: 0;
+}
+
+.faq-question::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to top, rgba(218, 116, 6, 0.8), rgba(255, 183, 94, 0.7));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1; /* pastikan di belakang konten */
+}
+
+.faq-item.active .faq-question::before {
+  opacity: 1;
+}
+
+.faq-item.active .faq-question {
+  color: #033b4a;
+  font-weight: 600;
 }
 
 .faq-question:hover {
@@ -179,6 +220,10 @@
     padding: 0 var(--space-md);
 }
 
+.faq-answer-text {
+    margin-top: 20px;
+}
+
 .faq-item.active .faq-answer {
     height: auto;
     padding: 0 var(--space-md) var(--space-md);
@@ -189,6 +234,10 @@
     color: var(--text-medium);
 }
 
+.paragraph-justify {
+    text-align: justify;
+}
+
 /* Responsive */
 @media (min-width: 992px) {
     .contact-grid {
@@ -197,5 +246,19 @@
 
     .contact-form-container {
         height: fit-content;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-title {
+        text-align: center;
+    }
+
+    .contact-info h2::after {
+        width: 100%;
+    }
+
+    .contact-form-container h2::after {
+        width: 100%;
     }
 }

@@ -1,29 +1,21 @@
 $(document).ready(() => {
-    const mosqueId = auth.getUid();
+    const mosqueId = window.auth.getUid();
+    let isAnnouncementsEmpty = true;
 
     $.ajax({
         url: `/mosques/${mosqueId}/announcements`,
         success: (response) => {
-            $(".announcements-list").empty();
+            const announcements = response.data;
 
-            for (const announcement of response.data) {
-                const btn = $(`<button class="btn btn-danger btn-sm">Delete</button>`);
-                btn.on("click", () => deleteAnnouncement(announcement.id));
+            if (announcements.length) {
+                isAnnouncementsEmpty = false;
+                $(".announcements-list").empty();
 
-                const item = $(`
-                    <div class="announcement-card">
-                                <div class="announcement-header">
-                                    <h3>${announcement.title}</h3>
-                                </div>
-                                <p>
-                                    ${announcement.description}
-                                </p>
-                                <div class="announcement-actions">
-                                </div>
-                            </div>`);
-
-                $(item).appendTo(".announcements-list");
-                $(item).children(".announcement-actions").append(btn);
+                for (const announcement of announcements) {
+                    renderAnnouncement(announcement);
+                }
+            } else {
+                $(".announcements-list").html("<p>No announcements created yet.</p>");
             }
         },
         error: (e) => {
@@ -42,17 +34,18 @@ $(document).ready(() => {
                 description: $("#announcement-content").val(),
             },
             success: (response) => {
-                const successMessage = $("<div class='success-message'>Announcement added!</div>");
-                $(this).prepend(successMessage);
+                const announcement = response.data;
+                alert("Announcement successfully added!");
 
-                console.log(response);
+                if (isAnnouncementsEmpty) {
+                    isAnnouncementsEmpty = false;
+                    $(".announcements-list").empty();
+                }
 
-                // Remove success message after 3 seconds
-                setTimeout(() => {
-                    successMessage.fadeOut(300, function () {
-                        $(this).remove();
-                    });
-                }, 3000);
+                $("#announcement-form form").trigger("reset");
+                $(".announcements-list").show();
+                $("#announcement-form").addClass("hidden");
+                renderAnnouncement(announcement);
             },
             error: (e) => {
                 alert("Failed to add announcement");
@@ -67,11 +60,56 @@ $(document).ready(() => {
             method: "DELETE",
             success: (response) => {
                 alert("Announcement deleted");
-                console.log(response);
+                $(".announcement-card[data-id='" + id + "']").remove();
             },
             error: (e) => {
                 console.error(e.responseJSON.message);
             },
         });
     }
+
+    function renderAnnouncement(announcement) {
+        const btn = $(`<button class="btn btn-danger btn-sm">Delete</button>`);
+        btn.on("click", () => deleteAnnouncement(announcement.id));
+
+        const item = $(`
+            <div class="announcement-card" data-id="${announcement.id}">
+                <div class="announcement-header">
+                    <h3>${announcement.title}</h3>
+                </div>
+                <p>${announcement.description}</p>
+                <div class="announcement-actions"></div>
+            </div>
+        `);
+
+        $(item).appendTo(".announcements-list");
+        $(item).children(".announcement-actions").append(btn);
+    }
+});
+
+const textarea = document.getElementById("announcement-content");
+
+textarea.addEventListener("focus", () => {
+    if (textarea.value.trim() === "") {
+        textarea.style.height = "126px"; // approx. 3 lines
+    } else {
+        textarea.style.height = "auto";
+        textarea.style.height = textarea.scrollHeight + "px"; // fit content height
+    }
+});
+
+// Shrink or auto-fit on blur
+textarea.addEventListener("blur", () => {
+    if (textarea.value.trim() === "") {
+        textarea.style.height = "42px"; // back to 1 line
+    } else {
+        textarea.style.height = "auto";
+        textarea.style.height = textarea.scrollHeight + "px"; // fit content height
+    }
+});
+
+// Optional: auto-adjust while typing
+textarea.addEventListener("input", () => {
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
 });

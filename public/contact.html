@@ -4,7 +4,10 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Contact Us - Bina Masjid Digital</title>
+        <link rel="icon" href="assets/img/logo.png" type="image/x-icon" />
         <link rel="stylesheet" href="./css/style.css" />
+        <link rel="stylesheet" href="./css/mobile-navbar.css" />
+        <link rel="stylesheet" href="./css/header.css" />
         <link rel="stylesheet" href="./css/contact.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap"
@@ -17,8 +20,8 @@
             <div id="header-placeholder"></div>
 
             <main>
-                <section class="page-header">
-                    <div class="container">
+                <section class="contact-header">
+                    <div class="contact-container">
                         <h1>Contact Us</h1>
                         <p>We're here to help with any questions about Bina Masjid Digital</p>
                     </div>
@@ -28,8 +31,8 @@
                     <div class="container">
                         <div class="contact-grid">
                             <div class="contact-info">
-                                <h2>Get in Touch</h2>
-                                <p>
+                                <h2 class="contact-title">Get in Touch</h2>
+                                <p class="paragraph-justify">
                                     Have questions about our platform or need assistance? Reach out
                                     to our friendly team using any of the methods below:
                                 </p>
@@ -52,7 +55,7 @@
                                         </div>
                                         <div class="method-details">
                                             <h3>Call Us</h3>
-                                            <p>+1 (234) 567-8900</p>
+                                            <p>+621 123-4567</p>
                                             <p>Available Monday-Friday, 9am-5pm</p>
                                         </div>
                                     </div>
@@ -66,8 +69,8 @@
                                         </div>
                                         <div class="method-details">
                                             <h3>Visit Us</h3>
-                                            <p>123 Tech Avenue, Suite 456</p>
-                                            <p>Silicon Valley, CA 94000</p>
+                                            <p>Kemanggisan Street No. 123</p>
+                                            <p>West Jakarta, Indonesia</p>
                                         </div>
                                     </div>
                                 </div>
@@ -95,47 +98,78 @@
                             </div>
 
                             <div class="contact-form-container">
-                                <h2>Send Us a Message</h2>
+                                <h2 class="contact-title">Send Us a Message</h2>
                                 <form id="contact-form" class="contact-form" novalidate>
-                                    <div class="form-group">
-                                        <label for="name">Full Name</label>
-                                        <input type="text" id="name" name="name" required />
+                                    <div class="form__group field">
+                                        <input
+                                            type="input"
+                                            class="form__field"
+                                            placeholder="Name"
+                                            name="name"
+                                            id="name"
+                                            required
+                                        />
+                                        <label for="name" class="form__label">Name</label>
+                                    </div>
+                                    <div class="form__group field">
+                                        <input
+                                            type="email"
+                                            class="form__field"
+                                            placeholder="Email"
+                                            name="email"
+                                            id="email"
+                                            required
+                                        />
+                                        <label for="email" class="form__label">Email</label>
+                                    </div>
+                                    <div class="form__group field">
+                                        <input
+                                            type="text"
+                                            class="form__field"
+                                            placeholder="Mosque"
+                                            name="mosque"
+                                            id="mosque"
+                                            required
+                                        />
+                                        <label for="mosque" class="form__label"
+                                            >Mosque Name (if applicable)</label
+                                        >
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="email">Email Address</label>
-                                        <input type="email" id="email" name="email" required />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="mosque">Mosque Name (if applicable)</label>
-                                        <input type="text" id="mosque" name="mosque" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="subject">Subject</label>
-                                        <select id="subject" name="subject" required>
-                                            <option value="" disabled selected>
-                                                Select a subject
-                                            </option>
-                                            <option value="general">General Inquiry</option>
+                                    <div class="form__group field">
+                                        <select
+                                            class="form__field"
+                                            name="subject"
+                                            id="subject"
+                                            required
+                                        >
+                                            <option value="" disabled selected hidden></option>
+                                            <option value="facility">General Inquiry</option>
                                             <option value="support">Technical Support</option>
                                             <option value="feedback">Feedback</option>
                                             <option value="other">Other</option>
                                         </select>
+                                        <label for="subject" class="select__form__label form__label"
+                                            >Subject</label
+                                        >
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="message">Message</label>
+                                    <div class="form__group field">
                                         <textarea
-                                            id="message"
+                                            rows="1"
+                                            class="form__field"
+                                            placeholder="Your message"
                                             name="message"
-                                            rows="5"
+                                            id="message"
                                             required
                                         ></textarea>
+                                        <label for="message" class="form__label">Message</label>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">
+                                    <button
+                                        type="submit"
+                                        class="button-div width-full button-primary"
+                                    >
                                         Send Message
                                     </button>
                                 </form>
@@ -156,7 +190,7 @@
                                     </button>
                                 </div>
                                 <div class="faq-answer">
-                                    <p>
+                                    <p class="faq-answer-text">
                                         Bina Masjid Digital is available for free for basic
                                         features. We also offer premium plans with additional
                                         features starting at $29/month.
@@ -172,7 +206,7 @@
                                     </button>
                                 </div>
                                 <div class="faq-answer">
-                                    <p>
+                                    <p class="faq-answer-text">
                                         Currently, each mosque has one primary account for security
                                         reasons. However, we are working on adding multi-user access
                                         in our premium plans.
@@ -188,7 +222,7 @@
                                     </button>
                                 </div>
                                 <div class="faq-answer">
-                                    <p>
+                                    <p class="faq-answer-text">
                                         Yes, we use industry-standard encryption and security
                                         practices to protect all mosque data, with special attention
                                         to financial information.
@@ -204,7 +238,7 @@
                                     </button>
                                 </div>
                                 <div class="faq-answer">
-                                    <p>
+                                    <p class="faq-answer-text">
                                         You can export financial reports as PDF by selecting a date
                                         range in the Financial Records section and clicking the
                                         "Export to PDF" button.
@@ -218,6 +252,7 @@
 
             <!-- Footer will be loaded via jQuery -->
             <div id="footer-placeholder"></div>
+            <div id="mobile-navbar-placeholder"></div>
         </div>
 
         <script src="./js/jquery.min.js"></script>

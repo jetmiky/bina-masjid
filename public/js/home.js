@@ -3,6 +3,8 @@ $(document).ready(() => {
     let currentSlide = 0;
     const testimonials = $(".testimonial");
 
+    loadAllMosque();
+
     // Only initialize if there are testimonials
     if (testimonials.length > 0) {
         // Hide all testimonials except the first one
@@ -42,3 +44,39 @@ $(document).ready(() => {
         $(this).addClass("fade-in");
     });
 });
+
+// function loadAllMosque() {
+//     $.ajax(`/mosques/`, {
+//         success: (response) => {
+//             console.log(response)
+//         },
+//         error: (e) => {
+//             console.error(e.responseJSON.message);
+//         },
+//     });
+// }
+
+function loadAllMosque() {
+    $.ajax(`/mosques/`, {
+        success: (response) => {
+            const mosqueListContainer = $("#mosque-list");
+            mosqueListContainer.empty();
+
+            // Gunakan response.data jika data masjid berada di dalamnya
+            const mosques = response.data || response; // fallback jika tidak dibungkus
+
+            mosques.forEach((mosque) => {
+                const card = `
+                    <div class="mosque-card">
+                        <h3>${mosque.name}</h3>
+                        <a class="button-div button-primary width-full" href="/mosque.html?id=${mosque.uid}">View Details</a>
+                    </div>
+                `;
+                mosqueListContainer.append(card);
+            });
+        },
+        error: (e) => {
+            console.error(e.responseJSON?.message || e.statusText);
+        },
+    });
+}

@@ -1,14 +1,41 @@
 /* Authentication Pages Styles */
 .auth-container {
+    margin-top: 70px;
     padding: var(--space-xl) 0;
+    background-image:
+        url("../assets/img/Mosque.png"),
+        linear-gradient(to top, rgba(255, 183, 94, 0.7), rgba(255, 255, 255, 1));
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100dvh - 70px);
+}
+
+.auth-content:not(.register) {
+    max-width: 1000px;
 }
 
 .auth-content {
     display: grid;
     grid-template-columns: 1fr;
+    /* gap: var(--space-xl); */
+    margin: 0 5%;
+    background-color: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.2),
+        0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.auth-register-content {
+    display: grid;
+    grid-template-columns: 1fr;
     gap: var(--space-xl);
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 0 5%;
     background-color: white;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
@@ -16,10 +43,14 @@
 }
 
 .auth-image {
-    display: none;
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+    display: flex;
+    align-items: center;
+    background-image: url("../assets/img/mosquee.jpg");
+    background-size: cover;
+    background-position: center;
     padding: var(--space-lg);
     position: relative;
+    
 }
 
 .auth-image::before {
@@ -45,9 +76,14 @@
     padding: var(--space-lg);
 }
 
+.auth-form-header:not(.header-login) {
+    display: none;
+}
+
 .auth-form-header {
     text-align: center;
     margin-bottom: var(--space-lg);
+    margin-bottom: 50px;
 }
 
 .auth-form-header h1 {
@@ -88,7 +124,7 @@
 .toggle-password {
     position: absolute;
     right: 12px;
-    top: 50%;
+    top: 65%;
     transform: translateY(-50%);
     background: none;
     border: none;
@@ -142,17 +178,34 @@
     padding: var(--space-xl);
 }
 
+.left-panel {
+    background-image: linear-gradient(to top, rgba(144, 238, 224, 0.6), rgba(245, 245, 245, 1));
+}
+
 /* Responsive */
 @media (min-width: 768px) {
+
     .auth-form-container {
         padding: var(--space-xl);
     }
+    .auth-content:not(.login) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .auth-content:not(.register) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 
-    .auth-image {
+@media (max-width: 768px) {
+    .auth-content {
+        margin: 0 1%;
+    }
+
+   .auth-form-header:not(.header-login) {
         display: block;
     }
 
-    .auth-content {
-        grid-template-columns: 1fr 1fr;
+    .auth-image {
+            display: none;
     }
 }
