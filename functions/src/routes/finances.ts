@@ -10,7 +10,7 @@ import type FinanceRecord from "../types/FinanceRecord";
 
 const router = Router({ mergeParams: true });
 
-router.get("/", async (req: Request<{ uid: string }>, res: Response) => {
+router.get("/report", async (req: Request<{ uid: string }>, res: Response) => {
     const mosqueDocument = await db.mosques().doc(req.params.uid).get();
 
     if (!mosqueDocument.exists) {
@@ -56,6 +56,36 @@ router.get("/", async (req: Request<{ uid: string }>, res: Response) => {
 
     document.generate();
     document.end();
+});
+
+router.get("/", async (req: Request<{ uid: string }>, res: Response) => {
+    const mosqueDocument = await db.mosques().doc(req.params.uid).get();
+
+    if (!mosqueDocument.exists) {
+        throw new NotFoundError("Mosque not found");
+    }
+
+    const finances = await db.finances(req.params.uid).orderBy("date", "asc").get();
+    const records = finances.docs.map((record) => {
+        const data = record.data() as FinanceRecord;
+        return { ...data, date: data.date.toDate().toISOString() };
+    });
+
+    let income = 0;
+    let expense = 0;
+
+    for (const record of records) {
+        if (record.type === "income") {
+            income += record.amount;
+        } else {
+            expense += record.amount;
+        }
+    }
+
+    res.status(200).json({
+        status: "success",
+        data: { records, total: { income, expense, net: income - expense } },
+    });
 });
 
 router.post("/", validateToken, async (req: Request, res: Response) => {
