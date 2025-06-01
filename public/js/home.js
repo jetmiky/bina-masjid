@@ -45,25 +45,13 @@ $(document).ready(() => {
     });
 });
 
-// function loadAllMosque() {
-//     $.ajax(`/mosques/`, {
-//         success: (response) => {
-//             console.log(response)
-//         },
-//         error: (e) => {
-//             console.error(e.responseJSON.message);
-//         },
-//     });
-// }
-
 function loadAllMosque() {
-    $.ajax(`/mosques/`, {
+    $.ajax(`/mosques?limit=6`, {
         success: (response) => {
             const mosqueListContainer = $("#mosque-list");
             mosqueListContainer.empty();
 
-            // Gunakan response.data jika data masjid berada di dalamnya
-            const mosques = response.data || response; // fallback jika tidak dibungkus
+            const mosques = response.data; // fallback jika tidak dibungkus
 
             mosques.forEach((mosque) => {
                 const card = `
@@ -72,6 +60,7 @@ function loadAllMosque() {
                         <a class="button-div button-primary width-full" href="/mosque.html?id=${mosque.uid}">View Details</a>
                     </div>
                 `;
+
                 mosqueListContainer.append(card);
             });
         },
