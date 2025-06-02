@@ -68,10 +68,13 @@ export default class QRDocument extends PDFDocument {
         });
 
         const qr = canvas.toDataURL("image/png");
-
         this.image(qr, this.page.width / 2 - IMAGE_SIZE / 2, IMAGE_SIZE, {
             fit: [IMAGE_SIZE, IMAGE_SIZE],
             width: IMAGE_SIZE,
+        });
+
+        this.font("Helvetica", 10).text(URL, 50, 550, {
+            align: "center",
         });
     }
 }
