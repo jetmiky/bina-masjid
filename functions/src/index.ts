@@ -1,12 +1,9 @@
 import { onRequest } from "firebase-functions/v2/https";
 import * as logger from "firebase-functions/logger";
 import admin from "firebase-admin";
-import express, { type Request } from "express";
+import express from "express";
 import cors from "cors";
 import errorHandler from "./utils/errors";
-
-import multipart from "./utils/multipart";
-import { upload } from "./utils/storage";
 
 import auth from "./routes/auth";
 import mosques from "./routes/mosques";
@@ -23,24 +20,6 @@ if (!process.env.FUNCTIONS_EMULATOR) {
 
 app.use("/auth", auth);
 app.use("/mosques", mosques);
-
-app.post("/image", multipart("image"), async (request: Request, response) => {
-    const image = request.files?.image;
-
-    const imageUrls: string[] = [];
-    const images = [];
-
-    if (image) images.push(image);
-
-    for (const file of images) {
-        const { extension, mimeType, buffer } = file;
-        const url = await upload("mosques", "random", extension, mimeType, buffer, true);
-
-        imageUrls.push(url);
-    }
-
-    response.status(200).json({ imageUrls });
-});
 
 app.get("/ping", (request, response) => {
     logger.info("Hello logs!", { structuredData: true });
