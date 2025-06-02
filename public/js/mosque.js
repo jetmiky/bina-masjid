@@ -38,6 +38,7 @@ function loadMosqueDetails(mosqueId) {
         success: (response) => {
             const mosque = response.data;
 
+            $("#mosqueImage").css({ backgroundImage: `url(${mosque.img})` });
             $("#mosqueName").text(mosque.name);
             $("#mosqueName2").text(mosque.name);
             $("#mosqueAddress").html(

@@ -80,8 +80,8 @@
                                 class="user-avatar"
                             />
                             <div class="user-info">
-                                <span class="user-name">Ahmad Rahman</span>
-                                <span class="user-role">Administrator</span>
+                                <span class="user-name">Administrator</span>
+                                <span class="user-role">-</span>
                             </div>
                         </div>
                     </div>
@@ -113,10 +113,10 @@
                     </div>
 
                     <div class="content-grid">
-                        <form id="profile-form" class="auth-form" novalidate>
-                            <div class="auth-content login">
-                                <div class="auth-image profile"></div>
-                                <div class="auth-form-container left-panel">
+                        <div class="auth-content register">
+                            <div id="js-mosque-image" class="auth-image profile"></div>
+                            <div class="auth-form-container left-panel">
+                                <form id="profile-form" class="auth-form" novalidate>
                                     <div class="form-section">
                                         <h2>Mosque Information</h2>
                                         <div class="form__group field">
@@ -210,9 +210,32 @@
                                             Save Changes
                                         </button>
                                     </div>
-                                </div>
+                                </form>
                             </div>
-                        </form>
+                            <div class="auth-form-container right-panel">
+                                <form id="profile-img-form" class="auth-form" novalidate>
+                                    <div class="form-section">
+                                        <h2>Profile Image</h2>
+                                        <div class="form__group field">
+                                            <input
+                                                type="file"
+                                                class="form__field"
+                                                name="image"
+                                                id="mosque-image"
+                                                required
+                                            />
+                                        </div>
+
+                                        <button
+                                            type="submit"
+                                            class="button-div button-primary width-full"
+                                        >
+                                            Upload Image
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </main>
 

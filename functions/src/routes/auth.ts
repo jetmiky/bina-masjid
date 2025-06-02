@@ -34,6 +34,8 @@ router.post("/register", async (req, res) => {
             password: body.password,
         });
 
+        const img = admin.storage().bucket().file("mosques/default.jpg").publicUrl();
+
         await admin
             .firestore()
             .collection("mosques")
@@ -42,6 +44,7 @@ router.post("/register", async (req, res) => {
                 name: body.mosque.name,
                 address: { ...body.mosque.address, zip: String(body.mosque.address.zip) },
                 phone: body.mosque.phone,
+                img,
             });
 
         res.status(201).json({

@@ -50,6 +50,29 @@ $(document).ready(() => {
             },
         });
     });
+
+    $("#profile-img-form").on("submit", function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        $.ajax(`/mosques/${mosqueId}/image`, {
+            method: "PUT",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: (response) => {
+                const mosque = response.data;
+                fillMosqueDetails(mosque);
+
+                alert("Mosque profile image successfully updated");
+            },
+            error: (e) => {
+                alert("Error updating mosque profile image");
+                console.error(e.responseJSON.message);
+            },
+        });
+    });
 });
 
 function loadMosqueDetails(mosqueId) {
@@ -66,6 +89,7 @@ function loadMosqueDetails(mosqueId) {
 }
 
 function fillMosqueDetails(mosque) {
+    $("#js-mosque-image").css({ backgroundImage: `url(${mosque.img})` });
     $("#mosque-name").val(mosque.name);
     $("#mosque-phone").val(mosque.phone);
     $("#mosque-address").val(mosque.address.street);

@@ -13,6 +13,7 @@ export default interface Mosque {
     name: string;
     address: Address;
     phone: string;
+    img: string;
     announcements?: Announcements[];
     finances?: FinanceRecord[];
 }

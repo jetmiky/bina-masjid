@@ -2,12 +2,15 @@ import admin from "firebase-admin";
 import { type Request, Router } from "express";
 import { z } from "zod";
 import { validateToken } from "../utils/tokens";
-import { NotFoundError, UnauthorizedError } from "../utils/errors";
+import { BadRequestError, NotFoundError, UnauthorizedError } from "../utils/errors";
 import db from "../utils/db";
 
 import qr from "./qr";
 import announcements from "./announcements";
 import finances from "./finances";
+
+import multipart from "../utils/multipart";
+import { upload } from "../utils/storage";
 
 const router = Router();
 
@@ -61,7 +64,34 @@ router.put("/:uid", validateToken, async (req: Request, res) => {
     await db.mosques().doc(req.params.uid).update(mosque);
     await admin.auth().updateUser(req.params.uid, { displayName: body.name });
 
-    res.status(200).json({ message: "Mosque updated", data: mosque, success: true });
+    const updatedData = await db.mosques().doc(req.params.uid).get();
+
+    res.status(200).json({
+        message: "Mosque updated",
+        data: { ...updatedData.data() },
+        success: true,
+    });
+});
+
+router.put("/:uid/image", validateToken, multipart("image"), async (req: Request, res) => {
+    if (req.user?.uid !== req.params.uid) {
+        throw new UnauthorizedError("Unauthorized");
+    }
+
+    const image = req.files?.image;
+    if (!image) {
+        throw new BadRequestError("Cannot read profile image");
+    }
+
+    const { extension, mimeType, buffer } = image;
+    const url = await upload("mosques", "random", extension, mimeType, buffer, true);
+
+    await db.mosques().doc(req.params.uid).update({ img: url });
+    const mosque = await db.mosques().doc(req.params.uid).get();
+
+    return res
+        .status(200)
+        .json({ message: "Image uploaded", data: { ...mosque.data() }, success: true });
 });
 
 router.use("/:uid/qr", qr);
