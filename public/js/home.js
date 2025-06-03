@@ -46,7 +46,7 @@ $(document).ready(() => {
 });
 
 function loadAllMosque() {
-    $.ajax(`/mosques?limit=6`, {
+    $.ajax(`/mosques?limit=10`, {
         success: (response) => {
             const mosqueListContainer = $("#mosque-list");
             mosqueListContainer.empty();
